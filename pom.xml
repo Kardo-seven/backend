@@ -17,7 +17,8 @@
 
     <modules>
         <module>main-service</module>
-    </modules>
+		<module>dto-service</module>
+	</modules>
 
 	<properties>
 		<java.version>17</java.version>
