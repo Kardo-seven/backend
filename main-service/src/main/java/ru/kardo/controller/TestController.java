@@ -13,7 +13,7 @@ import ru.kardo.service.UserService;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("test")
+@RequestMapping("/test")
 @RequiredArgsConstructor
 @Slf4j
 public class TestController {
@@ -21,7 +21,6 @@ public class TestController {
     private final UserService userService;
 
     @GetMapping()
-    @PreAuthorize("hasAuthority('SCOPE_EXPERT')")
     ResponseEntity<String> getString(Principal principal) {
         User user = userService.findUserByEmail(principal.getName());
         return ResponseEntity.ok().body(user.getEmail());

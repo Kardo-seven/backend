@@ -62,8 +62,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll()
-                        .requestMatchers("/user/**").hasAuthority("SCOPE_PARTICIPANT")
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**",
+                                "/swagger-resources", "/v3/api-docs/**", "/proxy/**").permitAll()
                         .requestMatchers("/test/**").hasAuthority("SCOPE_PARTICIPANT")
                         .requestMatchers("/registration").permitAll()
                         .requestMatchers("/authorization").permitAll()
