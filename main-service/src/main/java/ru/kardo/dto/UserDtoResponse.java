@@ -11,7 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserDtoResponse {
 
-    private Long userId;
+    private Long id;
 
     private String email;
 
