@@ -9,7 +9,9 @@ import ru.kardo.exception.ConflictException;
 import ru.kardo.exception.NotFoundValidationException;
 import ru.kardo.mapper.UserMapper;
 import ru.kardo.model.Authority;
+import ru.kardo.model.Profile;
 import ru.kardo.model.User;
+import ru.kardo.repo.ProfileRepo;
 import ru.kardo.repo.UserRepo;
 
 import java.util.HashSet;
@@ -20,6 +22,7 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
+    private final ProfileRepo profileRepo;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,6 +36,8 @@ public class UserServiceImpl implements UserService {
                .build();
         user.getAuthoritySet().add(new Authority(userDtoRequest.getEnumAuth()));
         userRepo.save(user);
+        Profile profile = Profile.builder().user(user).build();
+        profileRepo.save(profile);
         return userMapper.toUserDtoResponse(user);
     }
 
