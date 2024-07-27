@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS profile (
 DROP TABLE IF EXISTS subscribers CASCADE;
 CREATE TABLE IF NOT EXISTS subscribers (
     user_id BIGINT REFERENCES profile(user_id) ON DELETE CASCADE,
-    friend_id BIGINT REFERENCES profile(user_id) ON DELETE CASCADE
+    subscriber_id BIGINT REFERENCES profile(user_id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id)
 );
 
 DROP TABLE IF EXISTS social_network_links CASCADE;

@@ -65,6 +65,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**",
                                 "/swagger-resources", "/v3/api-docs/**", "/proxy/**").permitAll()
                         .requestMatchers("/test/**").hasAuthority("SCOPE_PARTICIPANT")
+                        .requestMatchers("/profile/**").permitAll()
                         .requestMatchers("/registration").permitAll()
                         .requestMatchers("/authorization").permitAll()
                         .anyRequest().authenticated()

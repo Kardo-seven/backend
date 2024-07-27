@@ -14,13 +14,17 @@ public interface ProfileService {
 
     PublicationDtoResponse uploadPublication(Long userId, MultipartFile multipartFile, String description) throws IOException;
 
-    AvatarDtoResponse getAvatar(Long userId);
+    AvatarDtoResponse getAvatar(Long profileId);
 
-    List<PublicationDtoResponse> getPublications(Long userId);
+    List<PublicationDtoResponse> getPublications(Long profileId);
+
+    List<ProfileShortDtoResponse> getSubscribers(Long profileId);
 
     ProfileDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest);
 
-    ProfileDtoResponse getProfile(Long userId);
+    ProfileDtoResponse getProfile(Long profileId);
 
-    PublicationDtoResponse getPublication(Long publicationId, Long userId);
+    PublicationDtoResponse getPublication(Long publicationId, Long profileId);
+
+    void subscribe(Long subscriberId, Long profileId);
 }
