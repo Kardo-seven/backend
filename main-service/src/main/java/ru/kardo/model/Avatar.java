@@ -29,6 +29,6 @@ public class Avatar {
     private String link;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", unique = true)
     private Profile profile;
 }

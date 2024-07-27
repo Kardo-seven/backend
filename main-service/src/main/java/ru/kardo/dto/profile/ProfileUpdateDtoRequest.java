@@ -1,35 +1,35 @@
-package ru.kardo.dto;
+package ru.kardo.dto.profile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kardo.model.Avatar;
-import ru.kardo.model.Link;
-import ru.kardo.model.Publication;
-import ru.kardo.model.User;
 import ru.kardo.model.enums.Gender;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ProfileUpdateDtoResponse {
+@AllArgsConstructor
+public class ProfileUpdateDtoRequest {
 
-    private Long id;
-
+    @Pattern(regexp = "^[ а-яА-Яa-zA-Z]*$")
     private String name;
 
+    @Pattern(regexp = "^[ а-яА-Яa-zA-Z]*$")
     private String lastName;
 
+    @Pattern(regexp = "^[ а-яА-Яa-zA-Z]*$")
     private String surName;
 
+    @Pattern(regexp = "^(\\+7( )?)?((\\(\\d{3}\\))|\\d{3})( )?\\d{3}[- ]?\\d{2}[- ]?\\d{2}$")
     private String phone;
 
+    @Past(message = "Birthdate cant be in future")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
@@ -43,10 +43,4 @@ public class ProfileUpdateDtoResponse {
     private String city;
 
     private String citizenship;
-
-    private Long userId;
-
-    private Set<Link> linkSet;
-
-    private List<Publication> publicationList;
 }

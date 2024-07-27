@@ -1,4 +1,4 @@
-package ru.kardo.dto;
+package ru.kardo.dto.user;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

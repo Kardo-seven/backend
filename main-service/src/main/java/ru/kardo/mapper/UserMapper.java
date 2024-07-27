@@ -2,7 +2,7 @@ package ru.kardo.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.kardo.dto.UserDtoResponse;
+import ru.kardo.dto.user.UserDtoResponse;
 import ru.kardo.model.User;
 
 @Mapper(componentModel = "spring")

@@ -3,6 +3,7 @@ package ru.kardo.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Publication {
 
     @Id
@@ -27,7 +29,10 @@ public class Publication {
     @Column(name = "link")
     private String link;
 
-    @ManyToOne
-    @JoinColumn(name = "profile_id")
+    @Column(name = "description")
+    private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private Profile profile;
 }
