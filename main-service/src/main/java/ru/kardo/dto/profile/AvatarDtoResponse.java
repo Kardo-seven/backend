@@ -1,10 +1,8 @@
-package ru.kardo.dto;
+package ru.kardo.dto.profile;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kardo.model.Profile;
 
 @Data
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package ru.kardo.controller;
+package ru.kardo.controller.user;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +8,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import ru.kardo.dto.AuthDtoRequest;
-import ru.kardo.dto.UserDtoRequest;
-import ru.kardo.dto.UserDtoResponse;
+import ru.kardo.dto.user.AuthDtoRequest;
+import ru.kardo.dto.user.UserDtoRequest;
+import ru.kardo.dto.user.UserDtoResponse;
 import ru.kardo.security.service.TokenService;
 import ru.kardo.service.UserService;
 
