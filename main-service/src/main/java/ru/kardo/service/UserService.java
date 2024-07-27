@@ -1,8 +1,7 @@
 package ru.kardo.service;
 
-import ru.kardo.dto.AvatarDtoResponse;
-import ru.kardo.dto.UserDtoRequest;
-import ru.kardo.dto.UserDtoResponse;
+import ru.kardo.dto.user.UserDtoRequest;
+import ru.kardo.dto.user.UserDtoResponse;
 import ru.kardo.model.User;
 
 public interface UserService {

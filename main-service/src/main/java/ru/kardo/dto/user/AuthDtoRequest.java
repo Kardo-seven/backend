@@ -1,4 +1,4 @@
-package ru.kardo.dto;
+package ru.kardo.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
