@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.Link;
-import ru.kardo.model.Publication;
 import ru.kardo.model.enums.Gender;
 
 import java.time.LocalDate;
