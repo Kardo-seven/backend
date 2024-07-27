@@ -7,17 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PublicationDtoResponse {
+public class ProfileShortDtoResponse {
 
     private Long id;
 
-    private String title;
+    private String name;
 
-    private String type;
-
-    private String link;
-
-    private String description;
-
-    private Long profileId;
+    private String email;
 }
