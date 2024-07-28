@@ -17,6 +17,7 @@ import ru.kardo.service.UserService;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin
 public class AuthRegController {
 
     private final UserService userService;
