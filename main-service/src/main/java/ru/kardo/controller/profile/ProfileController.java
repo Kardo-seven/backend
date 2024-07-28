@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/profile")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin
 public class ProfileController {
 
     private final ProfileService profileService;
