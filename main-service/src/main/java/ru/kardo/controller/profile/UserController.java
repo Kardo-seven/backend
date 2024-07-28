@@ -25,16 +25,16 @@ public class UserController {
     private final UserService userService;
 
     @PatchMapping("/personal-information/update")
-    public ResponseEntity<ProfileDtoResponse> personalInformationUpdate(Principal principal,
-                                                                        @Valid @RequestBody ProfileUpdateDtoRequest profileUpdateDtoRequest) {
+    public ResponseEntity<ProfileFullDtoResponse> personalInformationUpdate(Principal principal,
+                                                                            @Valid @RequestBody ProfileUpdateDtoRequest profileUpdateDtoRequest) {
         User user = userService.findUserByEmail(principal.getName());
         log.info("PATCH: /user/personal-information/update/{}", user.getEmail());
         return ResponseEntity.ok().body(profileService.personalInformationUpdate(user.getId(), profileUpdateDtoRequest));
     }
 
     @PostMapping("/social-network/add")
-    public ResponseEntity<ProfileDtoResponse> addSocialNetworkLink(Principal principal,
-                                                                   @RequestBody SocialNetworkDtoRequest socialNetworkDtoRequest) {
+    public ResponseEntity<ProfileFullDtoResponse> addSocialNetworkLink(Principal principal,
+                                                                       @RequestBody SocialNetworkDtoRequest socialNetworkDtoRequest) {
         User user = userService.findUserByEmail(principal.getName());
         log.info("POST: /user/social-network/add/{}", user.getEmail());
         return ResponseEntity.status(201).body(profileService.addSocialNetworkLink(user.getId(), socialNetworkDtoRequest));
@@ -63,5 +63,12 @@ public class UserController {
         log.info("POST: /user/profile/subscribe/{}", profileId);
         profileService.subscribe(user.getId(), profileId);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<ProfileFullDtoResponse> getOwnProfile(Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        log.info("GET: /user/profile/{}", user.getEmail());
+        return ResponseEntity.ok().body(profileService.getOwnProfile(user.getId()));
     }
 }

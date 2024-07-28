@@ -13,4 +13,7 @@ public interface SubscriberRepo extends JpaRepository<Subscriber, Long> {
 
     @Query(value = "SELECT s.subscriberId FROM Subscriber s RIGHT JOIN Profile p ON  p.id = s.userId WHERE p.id = :id")
     List<Long> getAllProfileSubscribers(@Param("id") Long id);
+
+    @Query(value = "SELECT s.userId FROM Subscriber s RIGHT JOIN Profile p ON  p.id = s.subscriberId WHERE p.id = :id")
+    List<Long> getAllProfileSubscriptions(@Param("id") Long id);
 }
