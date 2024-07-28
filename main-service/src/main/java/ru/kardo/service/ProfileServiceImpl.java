@@ -1,6 +1,8 @@
 package ru.kardo.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kardo.dto.profile.*;
@@ -175,6 +177,12 @@ public class ProfileServiceImpl implements ProfileService {
                 .userId(profileId)
                 .subscriberId(subscriberId).build();
         subscriberRepo.save(subscriber);
+    }
+
+    @Override
+    public List<ProfilePreviewDtoResponse> getProfiles(Integer from, Integer size) {
+        List<Profile> profileList = profileRepo.findAll(PageRequest.of(from, size, Sort.by("name").ascending())).toList();
+        return profileMapper.toProfilePreviewDtoResponseList(profileList);
     }
 
     private void validateUsersById(Long subscriberId, Long profileId) {
