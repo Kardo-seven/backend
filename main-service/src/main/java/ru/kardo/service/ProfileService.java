@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProfileService {
 
-    ProfileDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest);
+    ProfileFullDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest);
 
     AvatarDtoResponse uploadAvatar(Long userId, MultipartFile multipartFile) throws IOException;
 
@@ -18,11 +18,15 @@ public interface ProfileService {
 
     List<PublicationDtoResponse> getPublications(Long profileId);
 
-    List<ProfileShortDtoResponse> getSubscribers(Long profileId);
+    List<ProfilePreviewDtoResponse> getSubscribers(Long profileId);
 
-    ProfileDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest);
+    List<ProfilePreviewDtoResponse> getSubscriptions(Long profileId);
 
-    ProfileDtoResponse getProfile(Long profileId);
+    ProfileFullDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest);
+
+    ProfileFullDtoResponse getOwnProfile(Long profileId);
+
+    ProfileShortDtoResponse getProfile(Long profileId);
 
     PublicationDtoResponse getPublication(Long publicationId, Long profileId);
 

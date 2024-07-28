@@ -56,6 +56,9 @@ public class Profile {
     @Column(name = "citizenship")
     private String citizenship;
 
+    @OneToOne(mappedBy = "profile", fetch = FetchType.LAZY)
+    private Avatar avatar;
+
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "user_id")

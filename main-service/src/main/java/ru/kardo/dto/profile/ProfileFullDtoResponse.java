@@ -15,7 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfileDtoResponse {
+public class ProfileFullDtoResponse {
 
     private Long id;
 
@@ -40,6 +40,8 @@ public class ProfileDtoResponse {
     private String city;
 
     private String citizenship;
+
+    private Long avatarId;
 
     private Long userId;
 

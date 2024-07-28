@@ -1,4 +1,4 @@
-package ru.kardo.controller.security;
+package ru.kardo.security.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
