@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kardo.dto.profile.*;
 import ru.kardo.service.ProfileService;
-import ru.kardo.service.UserService;
 import java.util.List;
 
 @RestController
@@ -19,31 +18,37 @@ public class ProfileController {
 
     @GetMapping("/{profileId}/avatar")
     public ResponseEntity<AvatarDtoResponse> getAvatar(@PathVariable Long profileId) {
-        log.info("GET: /user/profile/{}/avatar", profileId);
+        log.info("GET: /profile/{}/avatar", profileId);
         return ResponseEntity.ok().body(profileService.getAvatar(profileId));
     }
 
     @GetMapping("/{profileId}")
-    public ResponseEntity<ProfileDtoResponse> getProfile(@PathVariable Long profileId) {
-        log.info("GET: /user/profile/{}", profileId);
+    public ResponseEntity<ProfileShortDtoResponse> getProfile(@PathVariable Long profileId) {
+        log.info("GET: /profile/{}", profileId);
         return ResponseEntity.ok().body(profileService.getProfile(profileId));
     }
 
     @GetMapping("/{profileId}/publications")
     public ResponseEntity<List<PublicationDtoResponse>> getPublications(@PathVariable Long profileId) {
-        log.info("GET: /user/profile/{}/publications", profileId);
+        log.info("GET: /profile/{}/publications", profileId);
         return ResponseEntity.ok().body(profileService.getPublications(profileId));
     }
 
     @GetMapping("/{profileId}/publication/{publicationId}")
     public ResponseEntity<PublicationDtoResponse> getPublication(@PathVariable Long profileId, @PathVariable Long publicationId) {
-        log.info("GET: /user/profile/{}/publication/{}", profileId, publicationId);
+        log.info("GET: /profile/{}/publication/{}", profileId, publicationId);
         return ResponseEntity.ok().body(profileService.getPublication(publicationId, profileId));
     }
 
     @GetMapping("/{profileId}/subscribers")
-    public ResponseEntity<List<ProfileShortDtoResponse>> getSubscribers(@PathVariable Long profileId) {
-        log.info("GET: /user/profile/{}/subscribers", profileId);
+    public ResponseEntity<List<ProfilePreviewDtoResponse>> getSubscribers(@PathVariable Long profileId) {
+        log.info("GET: /profile/{}/subscribers", profileId);
         return ResponseEntity.ok().body(profileService.getSubscribers(profileId));
+    }
+
+    @GetMapping("/{profileId}/subscriptions")
+    public ResponseEntity<List<ProfilePreviewDtoResponse>> getSubscriptions(@PathVariable Long profileId) {
+        log.info("GET: /profile/{}/subscriptions", profileId);
+        return ResponseEntity.ok().body(profileService.getSubscriptions(profileId));
     }
 }

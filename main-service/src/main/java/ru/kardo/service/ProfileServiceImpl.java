@@ -36,12 +36,12 @@ public class ProfileServiceImpl implements ProfileService {
     private final SubscriberRepo subscriberRepo;
 
     @Override
-    public ProfileDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
+    public ProfileFullDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
        Profile oldProfile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile for user with id " + userId + " not found"));
        Profile updatedProfile = profileParametersUpdate(oldProfile, profileUpdateDtoRequest);
        profileRepo.save(updatedProfile);
-       return profileMapper.toProfileDtoResponse(updatedProfile);
+       return profileMapper.toProfileFullDtoResponse(updatedProfile);
     }
 
     @Override
@@ -112,30 +112,48 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public List<ProfileShortDtoResponse> getSubscribers(Long profileId) {
+    public List<ProfilePreviewDtoResponse> getSubscribers(Long profileId) {
         List<Long> longs = subscriberRepo.getAllProfileSubscribers(profileId);
         List<Profile> profileList = longs.stream()
                 .filter(Objects::nonNull)
                 .map(id -> profileRepo.findById(id).orElseThrow(() ->
                         new NotFoundValidationException("Profile with id: " + profileId + " not found")))
                 .collect(Collectors.toList());
-        return profileMapper.toProfileShortDtoResponseList(profileList);
+        return profileMapper.toProfilePreviewDtoResponseList(profileList);
     }
 
     @Override
-    public ProfileDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest) {
+    public List<ProfilePreviewDtoResponse> getSubscriptions(Long profileId) {
+        List<Long> longs = subscriberRepo.getAllProfileSubscriptions(profileId);
+        List<Profile> profileList = longs.stream()
+                .filter(Objects::nonNull)
+                .map(id -> profileRepo.findById(id).orElseThrow(() ->
+                        new NotFoundValidationException("Profile with id: " + profileId + " not found")))
+                .collect(Collectors.toList());
+        return profileMapper.toProfilePreviewDtoResponseList(profileList);
+    }
+
+    @Override
+    public ProfileFullDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest) {
         Profile profile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile for user with id: " + userId + " not found"));
         socialNetworkDtoRequest.getLinkList().forEach(link -> profile.getLinkSet().add(new Link(link)));
         profileRepo.save(profile);
-        return profileMapper.toProfileDtoResponse(profile);
+        return profileMapper.toProfileFullDtoResponse(profile);
     }
 
     @Override
-    public ProfileDtoResponse getProfile(Long profileId) {
+    public ProfileFullDtoResponse getOwnProfile(Long profileId) {
         Profile profile = profileRepo.findById(profileId).orElseThrow(() ->
                 new NotFoundValidationException("Profile for user with id: " + profileId + " not found"));
-        return profileMapper.toProfileDtoResponse(profile);
+        return profileMapper.toProfileFullDtoResponse(profile);
+    }
+
+    @Override
+    public ProfileShortDtoResponse getProfile(Long profileId) {
+        Profile profile = profileRepo.findById(profileId).orElseThrow(() ->
+                new NotFoundValidationException("Profile for user with id: " + profileId + " not found"));
+        return profileMapper.toProfileShortDtoResponse(profile);
     }
 
     @Override
