@@ -19,6 +19,7 @@ import java.security.Principal;
 @RequestMapping("/user")
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin
 public class UserController {
 
     private final ProfileService profileService;
