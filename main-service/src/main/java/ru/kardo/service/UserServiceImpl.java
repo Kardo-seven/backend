@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
                .password(passwordEncoder.encode(userDtoRequest.getPassword()))
                .authoritySet(new HashSet<>())
                .build();
-        user.getAuthoritySet().add(new Authority(userDtoRequest.getEnumAuth()));
+        user.getAuthoritySet().add(userDtoRequest.getEnumAuth() != null ? new Authority(userDtoRequest.getEnumAuth()) : new Authority());
         userRepo.save(user);
         Profile profile = Profile.builder().user(user).build();
         profileRepo.save(profile);
