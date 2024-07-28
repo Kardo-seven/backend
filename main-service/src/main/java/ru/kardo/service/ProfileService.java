@@ -31,4 +31,6 @@ public interface ProfileService {
     PublicationDtoResponse getPublication(Long publicationId, Long profileId);
 
     void subscribe(Long subscriberId, Long profileId);
+
+    List<ProfilePreviewDtoResponse> getProfiles(Integer from, Integer size);
 }

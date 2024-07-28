@@ -1,5 +1,7 @@
 package ru.kardo.controller.profile;
 
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +52,14 @@ public class ProfileController {
     public ResponseEntity<List<ProfilePreviewDtoResponse>> getSubscriptions(@PathVariable Long profileId) {
         log.info("GET: /profile/{}/subscriptions", profileId);
         return ResponseEntity.ok().body(profileService.getSubscriptions(profileId));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ProfilePreviewDtoResponse>> getProfiles(@RequestParam(value = "from", defaultValue = "0")
+                                                                           @PositiveOrZero Integer from,
+                                                                       @RequestParam(value = "size", defaultValue = "5")
+                                                                           @Positive Integer size) {
+        log.info("GET: /profile?from={}&size={}", from, size);
+        return ResponseEntity.ok().body(profileService.getProfiles(from, size));
     }
 }
