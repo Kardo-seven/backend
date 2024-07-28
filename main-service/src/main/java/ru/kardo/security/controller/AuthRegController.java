@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.kardo.dto.user.AuthDtoRequest;
+import ru.kardo.dto.user.AuthRegResponse;
 import ru.kardo.dto.user.UserDtoRequest;
 import ru.kardo.dto.user.UserDtoResponse;
 import ru.kardo.security.service.TokenService;
@@ -31,7 +32,7 @@ public class AuthRegController {
     }
 
     @PostMapping("/authorization")
-    public ResponseEntity<String> getToken(@Valid @RequestBody AuthDtoRequest authDtoRequest) {
+    public ResponseEntity<AuthRegResponse> getToken(@Valid @RequestBody AuthDtoRequest authDtoRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDtoRequest.getEmail(), authDtoRequest.getPassword()));
         log.info("POST: /authorization");
         return ResponseEntity.ok().body(tokenService.generateToken(authentication));
