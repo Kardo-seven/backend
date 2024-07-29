@@ -135,14 +135,14 @@ public class ProfileServiceImpl implements ProfileService {
         return profileMapper.toProfilePreviewDtoResponseList(profileList);
     }
 
-    @Override
-    public ProfileFullDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest) {
-        Profile profile = profileRepo.findById(userId).orElseThrow(() ->
-                new NotFoundValidationException("Profile for user with id: " + userId + " not found"));
-        socialNetworkDtoRequest.getLinkList().forEach(link -> profile.getLinkSet().add(new Link(link)));
-        profileRepo.save(profile);
-        return profileMapper.toProfileFullDtoResponse(profile);
-    }
+//    @Override
+//    public ProfileFullDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest) {
+//        Profile profile = profileRepo.findById(userId).orElseThrow(() ->
+//                new NotFoundValidationException("Profile for user with id: " + userId + " not found"));
+//        socialNetworkDtoRequest.getLinkList().forEach(link -> profile.getLinkSet().add(new Link(link)));
+//        profileRepo.save(profile);
+//        return profileMapper.toProfileFullDtoResponse(profile);
+//    }
 
     @Override
     public ProfileFullDtoResponse getOwnProfile(Long profileId) {
@@ -238,6 +238,11 @@ public class ProfileServiceImpl implements ProfileService {
         if (profileUpdateDtoRequest.getCitizenship() != null) {
             if (!profileUpdateDtoRequest.getCitizenship().isBlank()) {
                 oldProfile.setCitizenship(profileUpdateDtoRequest.getCitizenship());
+            }
+        }
+        if (profileUpdateDtoRequest.getLinkList() != null) {
+            if (!profileUpdateDtoRequest.getLinkList().isEmpty()) {
+                profileUpdateDtoRequest.getLinkList().forEach(link -> oldProfile.getLinkSet().add(new Link(link)));
             }
         }
         return oldProfile;

@@ -33,13 +33,13 @@ public class UserController {
         return ResponseEntity.ok().body(profileService.personalInformationUpdate(user.getId(), profileUpdateDtoRequest));
     }
 
-    @PostMapping("/social-network/add")
-    public ResponseEntity<ProfileFullDtoResponse> addSocialNetworkLink(Principal principal,
-                                                                       @RequestBody SocialNetworkDtoRequest socialNetworkDtoRequest) {
-        User user = userService.findUserByEmail(principal.getName());
-        log.info("POST: /user/social-network/add/{}", user.getEmail());
-        return ResponseEntity.status(201).body(profileService.addSocialNetworkLink(user.getId(), socialNetworkDtoRequest));
-    }
+//    @PostMapping("/social-network/add")
+//    public ResponseEntity<ProfileFullDtoResponse> addSocialNetworkLink(Principal principal,
+//                                                                       @RequestBody SocialNetworkDtoRequest socialNetworkDtoRequest) {
+//        User user = userService.findUserByEmail(principal.getName());
+//        log.info("POST: /user/social-network/add/{}", user.getEmail());
+//        return ResponseEntity.status(201).body(profileService.addSocialNetworkLink(user.getId(), socialNetworkDtoRequest));
+//    }
 
     @PostMapping("/avatar/upload")
     public ResponseEntity<AvatarDtoResponse> uploadAvatar(Principal principal,
