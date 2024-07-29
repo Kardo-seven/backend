@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.enums.Gender;
+import ru.kardo.model.enums.RequestStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -64,6 +65,11 @@ public class UserRequest {
     @Builder.Default
     private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private RequestStatus requestStatus = RequestStatus.ACCEPTED;
+
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "request_social_network_links", joinColumns = @JoinColumn(name = "request_id"))
     @Column(name = "link")
@@ -71,4 +77,12 @@ public class UserRequest {
             @AttributeOverride(name = "link", column = @Column(name = "link"))
     })
     private Set<Link> linkSet;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "user_request_directions" , joinColumns = @JoinColumn(name = "request_id"))
+    @Column(name = "direction")
+    @AttributeOverrides({
+            @AttributeOverride(name = "direction", column = @Column(name = "direction"))
+    })
+    private Set<Direction> directionSet;
 }
