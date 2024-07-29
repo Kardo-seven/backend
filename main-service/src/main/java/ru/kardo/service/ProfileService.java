@@ -22,7 +22,7 @@ public interface ProfileService {
 
     List<ProfilePreviewDtoResponse> getSubscriptions(Long profileId);
 
-    ProfileFullDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest);
+//    ProfileFullDtoResponse addSocialNetworkLink(Long userId, SocialNetworkDtoRequest socialNetworkDtoRequest);
 
     ProfileFullDtoResponse getOwnProfile(Long profileId);
 
