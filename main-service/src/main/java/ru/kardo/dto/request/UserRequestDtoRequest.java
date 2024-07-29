@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.kardo.model.Direction;
+import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.Gender;
 import java.time.LocalDate;
 import java.util.List;
@@ -41,4 +43,6 @@ public class UserRequestDtoRequest {
     private Gender gender;
 
     private List<String> linkList;
+
+    private List<DirectionEnum> directionEnumList;
 }
