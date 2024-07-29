@@ -6,11 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kardo.model.Event;
-import ru.kardo.model.Link;
-import ru.kardo.model.Profile;
-import ru.kardo.model.RequestPreview;
+import ru.kardo.model.*;
+import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.Gender;
+import ru.kardo.model.enums.RequestStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,7 +43,12 @@ public class UserRequestDtoResponse {
 
     private Long eventId;
 
+    @Enumerated(EnumType.STRING)
+    private RequestStatus requestStatus;
+
     private LocalDateTime created;
 
     private Set<Link> linkSet;
+
+    private Set<Direction> directionSet;
 }
