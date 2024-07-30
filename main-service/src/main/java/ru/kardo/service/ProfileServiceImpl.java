@@ -242,6 +242,7 @@ public class ProfileServiceImpl implements ProfileService {
         }
         if (profileUpdateDtoRequest.getLinkList() != null) {
             if (!profileUpdateDtoRequest.getLinkList().isEmpty()) {
+                oldProfile.setLinkSet(new HashSet<>());
                 profileUpdateDtoRequest.getLinkList().forEach(link -> oldProfile.getLinkSet().add(new Link(link)));
             }
         }

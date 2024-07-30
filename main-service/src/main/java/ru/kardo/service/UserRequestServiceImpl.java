@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -112,9 +113,64 @@ public class UserRequestServiceImpl implements UserRequestService {
                 Files.copy(multipartFile.getInputStream(), target);
                 return requestPreviewMapper.toRequestPreviewDtoResponse(requestPreview);
             } else {
-                throw new ConflictException("123123");
+                throw new ConflictException("User request already registered");
             }
         }
+    }
+
+    @Override
+    public UserRequestDtoResponse patchUserRequest(Long userId, Long requestId, UserRequestDtoRequest userRequestDtoRequest) {
+        UserRequest userRequest = userRequestRepo.findByProfileIdAndId(userId, requestId).orElseThrow(() ->
+                new NotFoundValidationException("User request with id: " + requestId + " not found"));
+        UserRequest updatedUserRequest = userRequestParametersUpdate(userRequest, userRequestDtoRequest);
+        updatedUserRequest.setRequestStatus(RequestStatus.SEND);
+        userRequestRepo.save(updatedUserRequest);
+        return userRequestMapper.toUserRequestDtoResponse(updatedUserRequest);
+    }
+
+    private UserRequest userRequestParametersUpdate(UserRequest oldUserRequest, UserRequestDtoRequest userRequestDtoRequest) {
+        if (userRequestDtoRequest.getName() != null) {
+            if (!userRequestDtoRequest.getName().isBlank()) {
+                oldUserRequest.setName(userRequestDtoRequest.getName());
+            }
+        }
+        if (userRequestDtoRequest.getLastName() != null) {
+            if (!userRequestDtoRequest.getLastName().isBlank()) {
+                oldUserRequest.setLastName(userRequestDtoRequest.getLastName());
+            }
+        }
+        if (userRequestDtoRequest.getSurName() != null) {
+            if (!userRequestDtoRequest.getSurName().isBlank()) {
+                oldUserRequest.setSurName(userRequestDtoRequest.getSurName());
+            }
+        }
+        if (userRequestDtoRequest.getPhone() != null) {
+            if (!userRequestDtoRequest.getPhone().isBlank()) {
+                oldUserRequest.setPhone(userRequestDtoRequest.getPhone());
+            }
+        }
+        if (userRequestDtoRequest.getBirthday() != null) {
+            if (!userRequestDtoRequest.getBirthday().isAfter(ChronoLocalDate.from(LocalDateTime.now()))) {
+                oldUserRequest.setBirthday(userRequestDtoRequest.getBirthday());
+            }
+        }
+        if (userRequestDtoRequest.getGender() != null) {
+            userRequestDtoRequest.setGender(userRequestDtoRequest.getGender());
+        }
+        if (userRequestDtoRequest.getLinkList() != null) {
+            if (!userRequestDtoRequest.getLinkList().isEmpty()) {
+                oldUserRequest.setLinkSet(new HashSet<>());
+                userRequestDtoRequest.getLinkList().forEach(link -> oldUserRequest.getLinkSet().add(new Link(link)));
+            }
+        }
+        if (userRequestDtoRequest.getDirectionEnumList() != null) {
+            if (!userRequestDtoRequest.getDirectionEnumList().isEmpty()) {
+                oldUserRequest.setDirectionSet(new HashSet<>());
+                userRequestDtoRequest.getDirectionEnumList().forEach(directionEnum ->
+                        oldUserRequest.getDirectionSet().add(new Direction(directionEnum)));
+            }
+        }
+        return oldUserRequest;
     }
 
     private void postUserRequestValidation(UserRequestDtoRequest userRequestDtoRequest) {

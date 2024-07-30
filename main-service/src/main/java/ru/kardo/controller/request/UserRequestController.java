@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kardo.dto.request.RequestPreviewDtoResponse;
@@ -38,5 +39,13 @@ public class UserRequestController {
         User user = userService.findUserByEmail(principal.getName());
         log.info("POST: /user/request/{}/upload-preview for {}", eventId, user.getEmail());
         return ResponseEntity.status(201).body(userRequestService.uploadRequestPreview(user.getId(), eventId, multipartFile));
+    }
+
+    @PatchMapping("/{requestId}")
+    public ResponseEntity<UserRequestDtoResponse> patchUserRequest(Principal principal, @PathVariable Long requestId,
+                                                                   @Valid @RequestBody UserRequestDtoRequest userRequestDtoRequest) {
+        User user = userService.findUserByEmail(principal.getName());
+        log.info("PATCH: /user/request/{}", requestId);
+        return ResponseEntity.ok().body(userRequestService.patchUserRequest(user.getId(), requestId, userRequestDtoRequest));
     }
 }
