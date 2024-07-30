@@ -15,5 +15,7 @@ public interface UserRequestRepo extends JpaRepository<UserRequest, Long> {
 
     UserRequest findUserRequestByEventId(Long eventId);
 
+    Optional<UserRequest> findByProfileIdAndId(Long profileId, Long userRequestId);
+
     Optional<UserRequest> findUserRequestByProfileIdAndEventId(Long profileId, Long eventId);
 }
