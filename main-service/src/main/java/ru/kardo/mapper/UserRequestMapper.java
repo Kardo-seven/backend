@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import ru.kardo.dto.request.UserRequestDtoResponse;
 import ru.kardo.model.UserRequest;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = ProfileMapper.class)
 public interface UserRequestMapper {
 
     @Mapping(target = "eventId", source = "event.id")
