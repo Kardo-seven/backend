@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS user_requests (
     created TIMESTAMP,
     status varchar(200),
     user_id BIGINT REFERENCES profile(user_id) ON DELETE CASCADE NOT NULL,
-    event_id BIGINT REFERENCES events(event_id) ON DELETE CASCADE NOT NULL unique
+    event_id BIGINT REFERENCES events(event_id) ON DELETE CASCADE NOT NULL
 );
 
 DROP TABLE IF EXISTS request_preview CASCADE;

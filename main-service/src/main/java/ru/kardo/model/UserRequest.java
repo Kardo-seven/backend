@@ -57,7 +57,7 @@ public class UserRequest {
     @JoinColumn(name = "user_id")
     private Profile profile;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private Event event;
 
@@ -68,7 +68,7 @@ public class UserRequest {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private RequestStatus requestStatus = RequestStatus.ACCEPTED;
+    private RequestStatus requestStatus = RequestStatus.DRAFT;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "request_social_network_links", joinColumns = @JoinColumn(name = "request_id"))
