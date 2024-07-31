@@ -39,11 +39,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public ProfileFullDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
-       Profile oldProfile = profileRepo.findById(userId).orElseThrow(() ->
+        Profile oldProfile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile for user with id " + userId + " not found"));
-       Profile updatedProfile = profileParametersUpdate(oldProfile, profileUpdateDtoRequest);
-       profileRepo.save(updatedProfile);
-       return profileMapper.toProfileFullDtoResponse(updatedProfile);
+        profileMapper.updateLinkList(oldProfile, profileUpdateDtoRequest);
+        profileMapper.updateProfileDtoResponse(profileUpdateDtoRequest, oldProfile);
+        profileRepo.save(oldProfile);
+        return profileMapper.toProfileFullDtoResponse(oldProfile);
     }
 
     @Override
@@ -191,61 +192,61 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
 
-    private Profile profileParametersUpdate(Profile oldProfile, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
-        if (profileUpdateDtoRequest.getName() != null) {
-            if (!profileUpdateDtoRequest.getName().isBlank()) {
-                oldProfile.setName(profileUpdateDtoRequest.getName());
-            }
-        }
-        if (profileUpdateDtoRequest.getLastName() != null) {
-            if (!profileUpdateDtoRequest.getLastName().isBlank()) {
-                oldProfile.setLastName(profileUpdateDtoRequest.getLastName());
-            }
-        }
-        if (profileUpdateDtoRequest.getSurName() != null) {
-            if (!profileUpdateDtoRequest.getSurName().isBlank()) {
-                oldProfile.setSurName(profileUpdateDtoRequest.getSurName());
-            }
-        }
-        if (profileUpdateDtoRequest.getPhone() != null) {
-            if (!profileUpdateDtoRequest.getPhone().isBlank()) {
-                oldProfile.setPhone(profileUpdateDtoRequest.getPhone());
-            }
-        }
-        if (profileUpdateDtoRequest.getBirthday() != null) {
-            if (!profileUpdateDtoRequest.getBirthday().isAfter(ChronoLocalDate.from(LocalDateTime.now()))) {
-                oldProfile.setBirthday(profileUpdateDtoRequest.getBirthday());
-            }
-        }
-        if (profileUpdateDtoRequest.getGender() != null) {
-                oldProfile.setGender(profileUpdateDtoRequest.getGender());
-        }
-        if (profileUpdateDtoRequest.getCountry() != null) {
-            if (!profileUpdateDtoRequest.getCountry().isBlank()) {
-                oldProfile.setCountry(profileUpdateDtoRequest.getCountry());
-            }
-        }
-        if (profileUpdateDtoRequest.getRegion() != null) {
-            if (!profileUpdateDtoRequest.getRegion().isBlank()) {
-                oldProfile.setRegion(profileUpdateDtoRequest.getRegion());
-            }
-        }
-        if (profileUpdateDtoRequest.getCity() != null) {
-            if (!profileUpdateDtoRequest.getCity().isBlank()) {
-                oldProfile.setCity(profileUpdateDtoRequest.getCity());
-            }
-        }
-        if (profileUpdateDtoRequest.getCitizenship() != null) {
-            if (!profileUpdateDtoRequest.getCitizenship().isBlank()) {
-                oldProfile.setCitizenship(profileUpdateDtoRequest.getCitizenship());
-            }
-        }
-        if (profileUpdateDtoRequest.getLinkList() != null) {
-            if (!profileUpdateDtoRequest.getLinkList().isEmpty()) {
-                oldProfile.setLinkSet(new HashSet<>());
-                profileUpdateDtoRequest.getLinkList().forEach(link -> oldProfile.getLinkSet().add(new Link(link)));
-            }
-        }
-        return oldProfile;
-    }
+//    private Profile profileParametersUpdate(Profile oldProfile, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
+////        if (profileUpdateDtoRequest.getName() != null) {
+////            if (!profileUpdateDtoRequest.getName().isBlank()) {
+////                oldProfile.setName(profileUpdateDtoRequest.getName());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getLastName() != null) {
+////            if (!profileUpdateDtoRequest.getLastName().isBlank()) {
+////                oldProfile.setLastName(profileUpdateDtoRequest.getLastName());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getSurName() != null) {
+////            if (!profileUpdateDtoRequest.getSurName().isBlank()) {
+////                oldProfile.setSurName(profileUpdateDtoRequest.getSurName());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getPhone() != null) {
+////            if (!profileUpdateDtoRequest.getPhone().isBlank()) {
+////                oldProfile.setPhone(profileUpdateDtoRequest.getPhone());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getBirthday() != null) {
+////            if (!profileUpdateDtoRequest.getBirthday().isAfter(ChronoLocalDate.from(LocalDateTime.now()))) {
+////                oldProfile.setBirthday(profileUpdateDtoRequest.getBirthday());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getGender() != null) {
+////                oldProfile.setGender(profileUpdateDtoRequest.getGender());
+////        }
+////        if (profileUpdateDtoRequest.getCountry() != null) {
+////            if (!profileUpdateDtoRequest.getCountry().isBlank()) {
+////                oldProfile.setCountry(profileUpdateDtoRequest.getCountry());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getRegion() != null) {
+////            if (!profileUpdateDtoRequest.getRegion().isBlank()) {
+////                oldProfile.setRegion(profileUpdateDtoRequest.getRegion());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getCity() != null) {
+////            if (!profileUpdateDtoRequest.getCity().isBlank()) {
+////                oldProfile.setCity(profileUpdateDtoRequest.getCity());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getCitizenship() != null) {
+////            if (!profileUpdateDtoRequest.getCitizenship().isBlank()) {
+////                oldProfile.setCitizenship(profileUpdateDtoRequest.getCitizenship());
+////            }
+////        }
+//        if (profileUpdateDtoRequest.getLinkList() != null) {
+//            if (!profileUpdateDtoRequest.getLinkList().isEmpty()) {
+//                oldProfile.setLinkSet(new HashSet<>());
+//                profileUpdateDtoRequest.getLinkList().forEach(link -> oldProfile.getLinkSet().add(new Link(link)));
+//            }
+//        }
+//        return oldProfile;
+//    }
 }
