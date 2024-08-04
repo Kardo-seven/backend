@@ -1,4 +1,4 @@
-package ru.kardo.dto.profile;
+package ru.kardo.dto.newsBanner;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,13 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AvatarDtoResponse {
+public class NewsBannerDto {
+    private Long newsBannerId;
 
-    private Long id;
+    private String link;
 
     private String title;
 
     private String type;
-
-    private String link;
 }

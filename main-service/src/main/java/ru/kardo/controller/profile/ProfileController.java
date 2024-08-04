@@ -7,8 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kardo.dto.profile.*;
+import ru.kardo.model.enums.DirectionEnum;
+import ru.kardo.model.enums.EnumAuth;
 import ru.kardo.service.ProfileService;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/profile")
@@ -19,10 +22,10 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
-    @GetMapping("/{profileId}/avatar")
-    public ResponseEntity<AvatarDtoResponse> getAvatar(@PathVariable Long profileId) {
-        log.info("GET: /profile/{}/avatar", profileId);
-        return ResponseEntity.ok().body(profileService.getAvatar(profileId));
+    @GetMapping("/avatar/{avatarId}")
+    public ResponseEntity<AvatarDtoResponse> getAvatar(@PathVariable Long avatarId) {
+        log.info("GET: /profile/avatar/{}", avatarId);
+        return ResponseEntity.ok().body(profileService.getAvatar(avatarId));
     }
 
     @GetMapping("/{profileId}")
@@ -62,5 +65,18 @@ public class ProfileController {
                                                                            @Positive Integer size) {
         log.info("GET: /profile?from={}&size={}", from, size);
         return ResponseEntity.ok().body(profileService.getProfiles(from, size));
+    }
+
+    @GetMapping("/about_staff")
+    public List<ProfileAboutDto> getStaff(@RequestParam(required = false) Set<String> seasons,
+                                          @RequestParam(required = false) Set<DirectionEnum> directions,
+                                          @RequestParam(required = false) Set<EnumAuth> authorities,
+                                          @RequestParam(required = false) Set<String> countries,
+                                          @RequestParam(defaultValue = "false", required = false) Boolean isChild,
+                                          @RequestParam(defaultValue = "false", required = false) Boolean isChildExpert,
+                                          @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
+                                          @RequestParam(defaultValue = "5") @Positive Integer size) {
+        return profileService.getStaffAndFacts(seasons, directions, authorities, countries,
+                isChild, isChildExpert, from, size);
     }
 }

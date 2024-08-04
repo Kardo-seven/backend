@@ -1,4 +1,4 @@
-package ru.kardo.dto.profile;
+package ru.kardo.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AvatarDtoResponse {
+public class RequestPreviewDtoResponse {
+
 
     private Long id;
 
@@ -16,4 +17,6 @@ public class AvatarDtoResponse {
     private String type;
 
     private String link;
+
+    private Long userRequestId;
 }

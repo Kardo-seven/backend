@@ -1,15 +1,14 @@
-package ru.kardo.dto.profile;
+package ru.kardo.dto.resource;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class AvatarDtoResponse {
-
-    private Long id;
+@AllArgsConstructor
+@Data
+public class ResourceDto {
+    private Long resourceId;
 
     private String title;
 

@@ -2,5 +2,5 @@ package ru.kardo.model.enums;
 
 public enum RequestStatus {
 
-    ACCEPTED, DENIED
+    ACCEPTED, DENIED, DRAFT, SEND
 }
