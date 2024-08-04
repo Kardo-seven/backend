@@ -1,6 +1,7 @@
 package ru.kardo.mapper;
 
 import org.mapstruct.*;
+import ru.kardo.dto.profile.ProfileAboutDto;
 import ru.kardo.dto.profile.ProfileFullDtoResponse;
 import ru.kardo.dto.profile.ProfilePreviewDtoResponse;
 import ru.kardo.dto.profile.ProfileShortDtoResponse;
@@ -43,4 +44,7 @@ public interface ProfileMapper {
             }
         }
     }
+
+    @Mapping(target = "avatarLink", source = "avatar.link")
+    ProfileAboutDto toProfileAboutDto(Profile profile);
 }

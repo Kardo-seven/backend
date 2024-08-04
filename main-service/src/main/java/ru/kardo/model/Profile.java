@@ -3,6 +3,7 @@ package ru.kardo.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
+import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.Gender;
 import java.time.LocalDate;
 import java.util.List;
@@ -71,4 +72,23 @@ public class Profile {
 
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     private List<Publication> publicationList;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "profile_directions", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "direction")
+    @Enumerated(EnumType.STRING)
+    private Set<DirectionEnum> directions;
+
+    private String about;
+
+    @Column(name = "is_child")
+    private Boolean isChild;
+
+    @Column(name = "is_child_expert")
+    private Boolean isChildExpert;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "profile_seasons", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "season")
+    private Set<String> seasons;
 }
