@@ -19,10 +19,10 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
-    @GetMapping("/{profileId}/avatar")
-    public ResponseEntity<AvatarDtoResponse> getAvatar(@PathVariable Long profileId) {
-        log.info("GET: /profile/{}/avatar", profileId);
-        return ResponseEntity.ok().body(profileService.getAvatar(profileId));
+    @GetMapping("/avatar/{avatarId}")
+    public ResponseEntity<AvatarDtoResponse> getAvatar(@PathVariable Long avatarId) {
+        log.info("GET: /profile/avatar/{}", avatarId);
+        return ResponseEntity.ok().body(profileService.getAvatar(avatarId));
     }
 
     @GetMapping("/{profileId}")

@@ -16,6 +16,4 @@ public class AvatarDtoResponse {
     private String type;
 
     private String link;
-
-    private Long profileId;
 }

@@ -14,7 +14,7 @@ public interface ProfileService {
 
     PublicationDtoResponse uploadPublication(Long userId, MultipartFile multipartFile, String description) throws IOException;
 
-    AvatarDtoResponse getAvatar(Long profileId);
+    AvatarDtoResponse getAvatar(Long avatarId);
 
     List<PublicationDtoResponse> getPublications(Long profileId);
 

@@ -19,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -49,30 +48,30 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public AvatarDtoResponse uploadAvatar(Long userId, MultipartFile multipartFile) throws IOException {
-        userIdValidation(userId);
-        User user = userRepo.findById(userId).orElseThrow(() ->
-                new NotFoundValidationException("User with id " + userId + " not found"));
+        Profile profile = profileRepo.findById(userId).orElseThrow(() ->
+                new NotFoundValidationException("Profile with id: " + userId + " not found"));
+        profileAvatarValidation(profile);
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
         String fileName = multipartFile.getOriginalFilename();
-        String folderPath = "resources" + "/" + user.getEmail() + "/avatar";
+        String folderPath = "resources" + "/" + profile.getUser().getEmail() + "/avatar";
         Path path = Path.of(folderPath);
         if (Files.notExists(path)) {
             Files.createDirectories(path);
         }
         Avatar avatar = Avatar.builder()
-                .profile(profileRepo.findProfileByUserId(user.getId()))
                 .type(multipartFile.getContentType())
                 .title(date + fileName)
                 .link(folderPath + "/" + date + fileName)
                 .build();
+        profile.setAvatar(avatar);
         avatarRepo.save(avatar);
+        profileRepo.save(profile);
         Files.copy(multipartFile.getInputStream(), Paths.get(folderPath + "/" + date + fileName));
         return avatarMapper.toAvatarDtoResponse(avatar);
     }
 
-    private void userIdValidation(Long id) {
-        Set<Long> longSet = new HashSet<>(avatarRepo.findAllIds());
-        if (longSet.contains(id)) {
+    private void profileAvatarValidation(Profile profile) {
+        if (profile.getAvatar() != null) {
             throw new ConflictException("User already have avatar");
         }
     }
@@ -80,17 +79,17 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public PublicationDtoResponse uploadPublication(Long userId, MultipartFile multipartFile,
                                                     String description) throws IOException {
-        User user = userRepo.findById(userId).orElseThrow(() ->
-                new NotFoundValidationException("User with id " + userId + " not found"));
+        Profile profile = profileRepo.findById(userId).orElseThrow(() ->
+                new NotFoundValidationException("Profile with id: " + userId + " not found"));
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
         String fileName = multipartFile.getOriginalFilename();
-        String folderPath = "resources" + "/" + user.getEmail() + "/publications";
+        String folderPath = "resources" + "/" + profile.getUser().getEmail() + "/publications";
         Path path = Path.of(folderPath);
         if (Files.notExists(path)) {
             Files.createDirectories(path);
         }
         Publication publication = Publication.builder()
-                .profile(profileRepo.findProfileByUserId(user.getId()))
+                .profile(profile)
                 .description(description)
                 .type(multipartFile.getContentType())
                 .title(date + fileName)
@@ -102,9 +101,9 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public AvatarDtoResponse getAvatar(Long profileId) {
-        Avatar avatar = avatarRepo.findAvatarByProfileId(profileId).orElseThrow(() ->
-                new NotFoundValidationException("Avatar for profile with id: " + profileId + " not found"));
+    public AvatarDtoResponse getAvatar(Long avatarId) {
+        Avatar avatar = avatarRepo.findById(avatarId).orElseThrow(() ->
+                new NotFoundValidationException("Avatar with id: " + avatarId + " not found"));
        return avatarMapper.toAvatarDtoResponse(avatar);
     }
 

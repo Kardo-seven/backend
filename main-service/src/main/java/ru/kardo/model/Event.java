@@ -5,9 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kardo.model.enums.ProgramEnum;
+import ru.kardo.model.enums.EventType;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "events")
@@ -31,13 +32,24 @@ public class Event {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "program")
+    @Column(name = "event_type")
     @Enumerated(EnumType.STRING)
-    private ProgramEnum programEnum;
-
-    @Column(name = "country")
-    private String country;
+    private EventType eventType;
 
     @Column(name = "location")
     private String location;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "is_grand_final_event")
+    private Boolean isGrandFinalEvent;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "event_directions" , joinColumns = @JoinColumn(name = "event_id"))
+    @Column(name = "direction")
+    @AttributeOverrides({
+            @AttributeOverride(name = "direction", column = @Column(name = "direction"))
+    })
+    private Set<Direction> directionSet;
 }
