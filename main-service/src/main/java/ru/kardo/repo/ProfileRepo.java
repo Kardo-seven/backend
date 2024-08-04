@@ -13,6 +13,4 @@ import java.util.Optional;
 public interface ProfileRepo extends JpaRepository<Profile, Long> {
 
     Profile findProfileByUserId(Long id);
-
-
 }

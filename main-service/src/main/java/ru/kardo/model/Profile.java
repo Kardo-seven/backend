@@ -2,13 +2,8 @@ package ru.kardo.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ru.kardo.model.enums.Gender;
-
-import javax.accessibility.AccessibleAction;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = "avatar")
 public class Profile {
 
     @Id
@@ -56,7 +52,8 @@ public class Profile {
     @Column(name = "citizenship")
     private String citizenship;
 
-    @OneToOne(mappedBy = "profile", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "avatar_id", unique = true)
     private Avatar avatar;
 
     @OneToOne(fetch = FetchType.LAZY)
