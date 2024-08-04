@@ -9,12 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.enums.EnumAuth;
 
+import java.io.Serializable;
+
 @Embeddable
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Authority {
+public class Authority implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
