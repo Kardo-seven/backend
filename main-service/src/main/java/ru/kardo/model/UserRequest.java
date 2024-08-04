@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.enums.Gender;
 import ru.kardo.model.enums.RequestStatus;
+import ru.kardo.model.enums.TypeOfSelection;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -69,6 +70,10 @@ public class UserRequest {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private RequestStatus requestStatus = RequestStatus.DRAFT;
+
+    @Column(name = "type_of_selection")
+    @Enumerated(EnumType.STRING)
+    private TypeOfSelection typeOfSelection;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "request_social_network_links", joinColumns = @JoinColumn(name = "request_id"))

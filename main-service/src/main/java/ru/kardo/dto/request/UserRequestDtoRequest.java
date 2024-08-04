@@ -11,6 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.Gender;
+import ru.kardo.model.enums.TypeOfSelection;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,6 +44,9 @@ public class UserRequestDtoRequest {
     private Gender gender;
 
     private List<String> linkList;
+
+    @Enumerated(EnumType.STRING)
+    private TypeOfSelection typeOfSelection;
 
     private List<DirectionEnum> directionEnumList;
 }

@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS user_requests (
     gender varchar(20),
     email varchar(200),
     created TIMESTAMP,
+    type_of_selection varchar(200),
     status varchar(200),
     user_id BIGINT REFERENCES profile(user_id) ON DELETE CASCADE NOT NULL,
     event_id BIGINT REFERENCES events(event_id) ON DELETE CASCADE NOT NULL

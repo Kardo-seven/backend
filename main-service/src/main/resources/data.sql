@@ -42,13 +42,18 @@ INSERT INTO events VALUES (6, '2025-06-01 14:00:00',
                           );
 
 
-INSERT INTO events VALUES (7, '2025-04-01 13:00:00',
-                           '2025-05-01 19:00:00',
-                           'event number 7',
-                           null,
-                           'event7',
-                           'location7', true
+INSERT INTO events VALUES (7, '2025-08-22 19:00:00',
+                           '2025-08-22 22:00:00',
+                           'Шоу "Город КАРДО Присоединяйся к клавному герою в его путешенствии по городу КАРДО и узнай, как одна мечта может изменить мир! Это шоу для всех, кто любит мечтать, творить и жить на полную!',
+                           'COMPETITIONS',
+                           'ГЛАВНОЕ СОБЫТИЕ ДНЯ: ЦЕРЕМОНИЯ ОТКРЫТИЯ МЕЖДУНАРОДНОЙ КОНКУРС-ПРЕМИИ "КАРДО"',
+                           'Главная сцена, пл. Ленина',
+                            false
                           );
 
 INSERT INTO event_directions VALUES
     (7, 'BMX');
+INSERT INTO event_directions VALUES
+    (7, 'SKATEBOARDING');
+INSERT INTO event_directions VALUES
+    (7, 'SKATEBOARDING');
