@@ -19,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,39 +38,40 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public ProfileFullDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
-       Profile oldProfile = profileRepo.findById(userId).orElseThrow(() ->
+        Profile oldProfile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile for user with id " + userId + " not found"));
-       Profile updatedProfile = profileParametersUpdate(oldProfile, profileUpdateDtoRequest);
-       profileRepo.save(updatedProfile);
-       return profileMapper.toProfileFullDtoResponse(updatedProfile);
+        profileMapper.updateLinkList(oldProfile, profileUpdateDtoRequest);
+        profileMapper.updateProfileDtoResponse(profileUpdateDtoRequest, oldProfile);
+        profileRepo.save(oldProfile);
+        return profileMapper.toProfileFullDtoResponse(oldProfile);
     }
 
     @Override
     public AvatarDtoResponse uploadAvatar(Long userId, MultipartFile multipartFile) throws IOException {
-        userIdValidation(userId);
-        User user = userRepo.findById(userId).orElseThrow(() ->
-                new NotFoundValidationException("User with id " + userId + " not found"));
+        Profile profile = profileRepo.findById(userId).orElseThrow(() ->
+                new NotFoundValidationException("Profile with id: " + userId + " not found"));
+        profileAvatarValidation(profile);
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
         String fileName = multipartFile.getOriginalFilename();
-        String folderPath = "resources" + "/" + user.getEmail() + "/avatar";
+        String folderPath = "resources" + "/" + profile.getUser().getEmail() + "/avatar";
         Path path = Path.of(folderPath);
         if (Files.notExists(path)) {
             Files.createDirectories(path);
         }
         Avatar avatar = Avatar.builder()
-                .profile(profileRepo.findProfileByUserId(user.getId()))
                 .type(multipartFile.getContentType())
                 .title(date + fileName)
                 .link(folderPath + "/" + date + fileName)
                 .build();
+        profile.setAvatar(avatar);
         avatarRepo.save(avatar);
+        profileRepo.save(profile);
         Files.copy(multipartFile.getInputStream(), Paths.get(folderPath + "/" + date + fileName));
         return avatarMapper.toAvatarDtoResponse(avatar);
     }
 
-    private void userIdValidation(Long id) {
-        Set<Long> longSet = new HashSet<>(avatarRepo.findAllIds());
-        if (longSet.contains(id)) {
+    private void profileAvatarValidation(Profile profile) {
+        if (profile.getAvatar() != null) {
             throw new ConflictException("User already have avatar");
         }
     }
@@ -79,17 +79,17 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public PublicationDtoResponse uploadPublication(Long userId, MultipartFile multipartFile,
                                                     String description) throws IOException {
-        User user = userRepo.findById(userId).orElseThrow(() ->
-                new NotFoundValidationException("User with id " + userId + " not found"));
+        Profile profile = profileRepo.findById(userId).orElseThrow(() ->
+                new NotFoundValidationException("Profile with id: " + userId + " not found"));
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
         String fileName = multipartFile.getOriginalFilename();
-        String folderPath = "resources" + "/" + user.getEmail() + "/publications";
+        String folderPath = "resources" + "/" + profile.getUser().getEmail() + "/publications";
         Path path = Path.of(folderPath);
         if (Files.notExists(path)) {
             Files.createDirectories(path);
         }
         Publication publication = Publication.builder()
-                .profile(profileRepo.findProfileByUserId(user.getId()))
+                .profile(profile)
                 .description(description)
                 .type(multipartFile.getContentType())
                 .title(date + fileName)
@@ -101,9 +101,9 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public AvatarDtoResponse getAvatar(Long profileId) {
-        Avatar avatar = avatarRepo.findAvatarByProfileId(profileId).orElseThrow(() ->
-                new NotFoundValidationException("Avatar for profile with id: " + profileId + " not found"));
+    public AvatarDtoResponse getAvatar(Long avatarId) {
+        Avatar avatar = avatarRepo.findById(avatarId).orElseThrow(() ->
+                new NotFoundValidationException("Avatar with id: " + avatarId + " not found"));
        return avatarMapper.toAvatarDtoResponse(avatar);
     }
 
@@ -191,60 +191,61 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
 
-    private Profile profileParametersUpdate(Profile oldProfile, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
-        if (profileUpdateDtoRequest.getName() != null) {
-            if (!profileUpdateDtoRequest.getName().isBlank()) {
-                oldProfile.setName(profileUpdateDtoRequest.getName());
-            }
-        }
-        if (profileUpdateDtoRequest.getLastName() != null) {
-            if (!profileUpdateDtoRequest.getLastName().isBlank()) {
-                oldProfile.setLastName(profileUpdateDtoRequest.getLastName());
-            }
-        }
-        if (profileUpdateDtoRequest.getSurName() != null) {
-            if (!profileUpdateDtoRequest.getSurName().isBlank()) {
-                oldProfile.setSurName(profileUpdateDtoRequest.getSurName());
-            }
-        }
-        if (profileUpdateDtoRequest.getPhone() != null) {
-            if (!profileUpdateDtoRequest.getPhone().isBlank()) {
-                oldProfile.setPhone(profileUpdateDtoRequest.getPhone());
-            }
-        }
-        if (profileUpdateDtoRequest.getBirthday() != null) {
-            if (!profileUpdateDtoRequest.getBirthday().isAfter(ChronoLocalDate.from(LocalDateTime.now()))) {
-                oldProfile.setBirthday(profileUpdateDtoRequest.getBirthday());
-            }
-        }
-        if (profileUpdateDtoRequest.getGender() != null) {
-                oldProfile.setGender(profileUpdateDtoRequest.getGender());
-        }
-        if (profileUpdateDtoRequest.getCountry() != null) {
-            if (!profileUpdateDtoRequest.getCountry().isBlank()) {
-                oldProfile.setCountry(profileUpdateDtoRequest.getCountry());
-            }
-        }
-        if (profileUpdateDtoRequest.getRegion() != null) {
-            if (!profileUpdateDtoRequest.getRegion().isBlank()) {
-                oldProfile.setRegion(profileUpdateDtoRequest.getRegion());
-            }
-        }
-        if (profileUpdateDtoRequest.getCity() != null) {
-            if (!profileUpdateDtoRequest.getCity().isBlank()) {
-                oldProfile.setCity(profileUpdateDtoRequest.getCity());
-            }
-        }
-        if (profileUpdateDtoRequest.getCitizenship() != null) {
-            if (!profileUpdateDtoRequest.getCitizenship().isBlank()) {
-                oldProfile.setCitizenship(profileUpdateDtoRequest.getCitizenship());
-            }
-        }
-        if (profileUpdateDtoRequest.getLinkList() != null) {
-            if (!profileUpdateDtoRequest.getLinkList().isEmpty()) {
-                profileUpdateDtoRequest.getLinkList().forEach(link -> oldProfile.getLinkSet().add(new Link(link)));
-            }
-        }
-        return oldProfile;
-    }
+//    private Profile profileParametersUpdate(Profile oldProfile, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
+////        if (profileUpdateDtoRequest.getName() != null) {
+////            if (!profileUpdateDtoRequest.getName().isBlank()) {
+////                oldProfile.setName(profileUpdateDtoRequest.getName());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getLastName() != null) {
+////            if (!profileUpdateDtoRequest.getLastName().isBlank()) {
+////                oldProfile.setLastName(profileUpdateDtoRequest.getLastName());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getSurName() != null) {
+////            if (!profileUpdateDtoRequest.getSurName().isBlank()) {
+////                oldProfile.setSurName(profileUpdateDtoRequest.getSurName());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getPhone() != null) {
+////            if (!profileUpdateDtoRequest.getPhone().isBlank()) {
+////                oldProfile.setPhone(profileUpdateDtoRequest.getPhone());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getBirthday() != null) {
+////            if (!profileUpdateDtoRequest.getBirthday().isAfter(ChronoLocalDate.from(LocalDateTime.now()))) {
+////                oldProfile.setBirthday(profileUpdateDtoRequest.getBirthday());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getGender() != null) {
+////                oldProfile.setGender(profileUpdateDtoRequest.getGender());
+////        }
+////        if (profileUpdateDtoRequest.getCountry() != null) {
+////            if (!profileUpdateDtoRequest.getCountry().isBlank()) {
+////                oldProfile.setCountry(profileUpdateDtoRequest.getCountry());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getRegion() != null) {
+////            if (!profileUpdateDtoRequest.getRegion().isBlank()) {
+////                oldProfile.setRegion(profileUpdateDtoRequest.getRegion());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getCity() != null) {
+////            if (!profileUpdateDtoRequest.getCity().isBlank()) {
+////                oldProfile.setCity(profileUpdateDtoRequest.getCity());
+////            }
+////        }
+////        if (profileUpdateDtoRequest.getCitizenship() != null) {
+////            if (!profileUpdateDtoRequest.getCitizenship().isBlank()) {
+////                oldProfile.setCitizenship(profileUpdateDtoRequest.getCitizenship());
+////            }
+////        }
+//        if (profileUpdateDtoRequest.getLinkList() != null) {
+//            if (!profileUpdateDtoRequest.getLinkList().isEmpty()) {
+//                oldProfile.setLinkSet(new HashSet<>());
+//                profileUpdateDtoRequest.getLinkList().forEach(link -> oldProfile.getLinkSet().add(new Link(link)));
+//            }
+//        }
+//        return oldProfile;
+//    }
 }
