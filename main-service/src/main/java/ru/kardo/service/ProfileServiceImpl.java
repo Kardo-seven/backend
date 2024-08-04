@@ -2,6 +2,7 @@ package ru.kardo.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +13,8 @@ import ru.kardo.mapper.AvatarMapper;
 import ru.kardo.mapper.ProfileMapper;
 import ru.kardo.mapper.PublicationMapper;
 import ru.kardo.model.*;
+import ru.kardo.model.enums.DirectionEnum;
+import ru.kardo.model.enums.EnumAuth;
 import ru.kardo.repo.*;
 
 import java.io.IOException;
@@ -185,10 +188,29 @@ public class ProfileServiceImpl implements ProfileService {
         return profileMapper.toProfilePreviewDtoResponseList(profileList);
     }
 
+    @Override
+    public List<ProfileAboutDto> getStaffAndFacts(Set<String> seasons, Set<DirectionEnum> directions,
+                                                  Set<EnumAuth> authorities, Set<String> countries,
+                                                  Boolean isChild, Boolean isChildExpert,
+                                                  Integer from, Integer size) {
+        Pageable page = PageRequest.of(from / size, size, Sort.by(Sort.Direction.DESC, "id"));
+        return profileRepo.findStaff(seasons, directions, mapAuthority(authorities), countries,
+                        isChild, isChildExpert, page).stream()
+                .map(profileMapper::toProfileAboutDto)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
     private void validateUsersById(Long subscriberId, Long profileId) {
         if (subscriberId.equals(profileId)) {
             throw new ConflictException("Subscriber id and profile id must not be the same");
         }
+    }
+
+    private Set<Authority> mapAuthority(Set<EnumAuth> list) {
+        if (list == null) {
+            return new HashSet<>();
+        }
+        return list.stream().map(Authority::new).collect(Collectors.toSet());
     }
 
 //    private Profile profileParametersUpdate(Profile oldProfile, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
