@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.enums.Gender;
 import ru.kardo.model.enums.RequestStatus;
+import ru.kardo.model.enums.TypeOfSelection;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,6 +50,10 @@ public class UserRequest {
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Column(name = "type_of_selection")
+    @Enumerated(EnumType.STRING)
+    private TypeOfSelection typeOfSelection;
 
     @OneToOne(mappedBy = "userRequest", fetch = FetchType.LAZY)
     private RequestPreview requestPreview;

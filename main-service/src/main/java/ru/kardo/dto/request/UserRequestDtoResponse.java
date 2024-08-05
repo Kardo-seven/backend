@@ -10,6 +10,7 @@ import ru.kardo.model.*;
 import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.Gender;
 import ru.kardo.model.enums.RequestStatus;
+import ru.kardo.model.enums.TypeOfSelection;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,7 +36,11 @@ public class UserRequestDtoResponse {
 
     private LocalDate birthday;
 
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    private TypeOfSelection typeOfSelection;
 
     private Long requestPreviewId;
 
