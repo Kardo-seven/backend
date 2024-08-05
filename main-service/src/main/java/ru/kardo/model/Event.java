@@ -45,6 +45,10 @@ public class Event {
     @Column(name = "is_grand_final_event")
     private Boolean isGrandFinalEvent;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", unique = true)
+    private EventImage eventImage;
+
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "event_directions" , joinColumns = @JoinColumn(name = "event_id"))
     @Column(name = "direction")
