@@ -1,13 +1,9 @@
 package ru.kardo.controller.event;
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.kardo.dto.event.EventDtoResponse;
 import ru.kardo.service.EventService;
 
@@ -25,5 +21,11 @@ public class EventController {
     public ResponseEntity<List<EventDtoResponse>> getAllEvents() {
         log.info("GET: /event");
         return ResponseEntity.ok().body(eventService.getAllEvents());
+    }
+
+    @GetMapping("/{eventId}")
+    public ResponseEntity<EventDtoResponse> getEvent(@PathVariable Long eventId) {
+        log.info("GET: /event/{}", eventId);
+        return ResponseEntity.ok().body(eventService.getEvent(eventId));
     }
 }

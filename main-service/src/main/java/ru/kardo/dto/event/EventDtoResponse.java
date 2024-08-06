@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.Direction;
+import ru.kardo.model.EventImage;
 import ru.kardo.model.enums.EventType;
 
 import java.time.LocalDateTime;
@@ -34,6 +35,8 @@ public class EventDtoResponse {
     private String title;
 
     private Boolean isGrandFinalEvent;
+
+    private EventImage eventImage;
 
     private Set<Direction> directionSet;
 }

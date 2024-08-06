@@ -7,4 +7,6 @@ import java.util.List;
 public interface EventService {
 
     List<EventDtoResponse> getAllEvents();
+
+    EventDtoResponse getEvent(Long eventId);
 }
