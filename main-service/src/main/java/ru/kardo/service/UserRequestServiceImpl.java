@@ -55,6 +55,8 @@ public class UserRequestServiceImpl implements UserRequestService {
                     .phone(userRequestDtoRequest.getPhone())
                     .email(userRequestDtoRequest.getEmail())
                     .birthday(userRequestDtoRequest.getBirthday())
+                    .typeOfSelection(userRequestDtoRequest.getTypeOfSelection())
+                    .gender(userRequestDtoRequest.getGender())
                     .linkSet(new HashSet<>())
                     .event(event)
                     .directionSet(new HashSet<>())

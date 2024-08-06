@@ -1,6 +1,7 @@
 package ru.kardo.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
@@ -11,6 +12,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.Gender;
+import ru.kardo.model.enums.TypeOfSelection;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,6 +43,9 @@ public class UserRequestDtoRequest {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    private TypeOfSelection typeOfSelection;
 
     private List<String> linkList;
 
