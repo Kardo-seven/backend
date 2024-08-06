@@ -34,8 +34,8 @@ public interface ProfileRepo extends JpaRepository<Profile, Long> {
     List<Profile> findStaff(Set<String> seasons, Set<DirectionEnum> directions, Set<Authority> authoritySet,
                             Set<String> countries, Boolean isChild, Boolean isChildExpert, Pageable page);
 
-
     List<Profile> findAllByIsChildTrueOrIsChildExpertTrue();
+
 //    List<Profile> findBySeasonsInAndDirectionsInAndUserAuthoritySetInAndCountryInAndIsChildAndIsChildExpertOrderByIdDesc(
 //            Set<String> seasons, Set<DirectionEnum> directions, Set<Authority> authoritySet, Set<String> countries,
 //            Boolean isChild, Boolean isChildExpert, Pageable page);
