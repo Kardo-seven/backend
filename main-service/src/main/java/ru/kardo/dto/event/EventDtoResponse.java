@@ -9,6 +9,7 @@ import ru.kardo.model.Direction;
 import ru.kardo.model.EventImage;
 import ru.kardo.model.enums.EventType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -18,6 +19,9 @@ import java.util.Set;
 public class EventDtoResponse {
 
     private Long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate eventDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
