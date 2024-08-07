@@ -37,8 +37,9 @@ public interface ProfileService {
 
     List<ProfilePreviewDtoResponse> getProfiles(Integer from, Integer size);
 
-    public List<ProfileAboutDto> getStaffAndFacts(Set<String> seasons, Set<DirectionEnum> directions,
-                                                  Set<EnumAuth> roles, Set<String> countries,
-                                                  Boolean isChild, Boolean isChildExpert,
-                                                  Integer from, Integer size);
+    List<ProfileAboutDto> getStaffAndFacts(Set<String> seasons, Set<DirectionEnum> directions,
+                                           Set<EnumAuth> roles, Set<String> countries,
+                                           Integer from, Integer size);
+
+    List<ProfileAboutDto> getChildrenAndExperts();
 }
