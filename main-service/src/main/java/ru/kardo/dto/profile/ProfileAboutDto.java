@@ -24,5 +24,9 @@ public class ProfileAboutDto {
 
     private String about;
 
+    private Boolean isChild;
+
+    private Boolean isChildExpert;
+
     private String avatarLink;
 }
