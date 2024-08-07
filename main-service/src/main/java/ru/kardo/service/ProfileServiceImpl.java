@@ -194,11 +194,16 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileAboutDto> getStaffAndFacts(Set<String> seasons, Set<DirectionEnum> directions,
                                                   Set<EnumAuth> authorities, Set<String> countries,
-                                                  Boolean isChild, Boolean isChildExpert,
                                                   Integer from, Integer size) {
         Pageable page = PageRequest.of(from / size, size, Sort.by(Sort.Direction.DESC, "id"));
-        return profileRepo.findStaff(seasons, directions, mapAuthority(authorities), countries,
-                        isChild, isChildExpert, page).stream()
+        return profileRepo.findStaff(seasons, directions, mapAuthority(authorities), countries, page).stream()
+                .map(profileMapper::toProfileAboutDto)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @Override
+    public List<ProfileAboutDto> getChildrenAndExperts() {
+        return profileRepo.findAllByIsChildTrueOrIsChildExpertTrue().stream()
                 .map(profileMapper::toProfileAboutDto)
                 .collect(Collectors.toUnmodifiableList());
     }

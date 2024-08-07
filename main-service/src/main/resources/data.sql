@@ -190,3 +190,143 @@ INSERT INTO events VALUES (10, '2024-08-22', '2024-08-22 16:00:00',
 
 INSERT INTO event_directions VALUES (10, 'GRAFFITI');
 
+INSERT INTO documents (document_id, title, type, link) VALUES (
+    1,
+    'КАРДО[7]. Хип-хоп. Результаты второго этапа',
+    'document',
+    'src/main/resources/document/hip_hop_kardo-7_second-stage.pdf'
+);
+
+INSERT INTO documents (document_id, title, type, link) VALUES (
+    2,
+    'КАРДО[7]. Граффити. Результаты второго этапа',
+    'document',
+    'src/main/resources/document/graffiti_kardo-7_second-stage.pdf'
+);
+
+INSERT INTO documents (document_id, title, type, link) VALUES (
+    3,
+    'КАРДО[7]. Диджеинг. Результаты второго этапа',
+    'document',
+    'src/main/resources/document/dj_kardo-7_second-stage.pdf'
+);
+
+INSERT INTO documents (document_id, title, type, link) VALUES (
+    4,
+    'КАРДО[7]. Воркаут. Результаты второго этапа',
+    'document',
+    'src/main/resources/document/workout_kardo-7_second-stage.pdf'
+);
+
+INSERT INTO documents (document_id, title, type, link) VALUES (
+    5,
+    'Лауреаты конкурса «Премия» КАРДО [7]',
+    'document',
+    'src/main/resources/document/award_laureates_kardo-7.pdf'
+);
+
+INSERT INTO documents (document_id, title, type, link) VALUES (
+    6,
+    'КАРДО[7].Трикинг. Результаты второго этапа',
+    'document',
+    'src/main/resources/document/tricking_kardo-7_second-stage.pdf'
+);
+
+INSERT INTO news_banner (news_banner_id, link, title, type) VALUES (
+    1,
+    'src/main/resources/news/reg_mos_obl_kardo_24-1600x901.jpg.webp',
+    'РЕГИОНАЛЬНЫЙ ЭТАП: МОСКОВСКАЯ ОБЛАСТЬ',
+    'image jpg.webp'
+);
+
+INSERT INTO news (news_id, description, created, title, event_time, banner_id) VALUES (
+    1,
+    'Московская область готова собрать представителей улиц в одном месте!
+
+Покажи себя на региональном этапе в городе Дмитров. Соревнования пройдут по направлениям: скейтбординг, трюковой самокат, BMX, воркаут, трикинг, брейкинг.
+
+Участники будут бороться за право поехать с 22-25 августа на Гранд-финал «КАРДО» [7] в Ставрополе.
+
+Время и место проведения:
+— 14 июля, г. Дмитров, МБУ ПКиО «Березовая роща», 14:00',
+    '2024-02-14 11:00:00',
+    'РЕГИОНАЛЬНЫЙ ЭТАП: МОСКОВСКАЯ ОБЛАСТЬ',
+    '2024-07-14 14:00:00',
+    1
+);
+
+INSERT INTO news_banner (news_banner_id, link, title, type) VALUES (
+    2,
+    'src/main/resources/news/reg_tatarstan_kardo_24-1600x901.jpg.webp',
+    'РЕГИОНАЛЬНЫЙ ЭТАП: РЕСПУБЛИКА ТАТАРСТАН',
+    'image jpg.webp'
+);
+
+INSERT INTO news (news_id, description, created, title, event_time, banner_id) VALUES (
+    2,
+    'Покажи себя на региональном этапе в Казани! 29 июня пройдут соревнования по направлениям: трюковой самокат, BMX, воркаут, паркур, фриран.
+
+Топы получат возможность приехать 22-25 августа на Гранд-финал «КАРДО» в Ставрополь.
+
+Время и место проведения:
+— Экстрим-парк «Урам», с 10:00.',
+    '2024-02-12 12:00:00',
+    'РЕГИОНАЛЬНЫЙ ЭТАП: РЕСПУБЛИКА ТАТАРСТАН',
+    '2024-06-29 10:00:00',
+    2
+);
+
+INSERT INTO news_banner (news_banner_id, link, title, type) VALUES (
+    3,
+    'src/main/resources/news/reg_smolensk_kardo_24-1600x901.jpg.webp',
+    'РЕГИОНАЛЬНЫЙ ЭТАП: СМОЛЕНСКАЯ ОБЛАСТЬ',
+    'image jpg.webp'
+);
+
+INSERT INTO news (news_id, description, created, title, event_time, banner_id) VALUES (
+    3,
+    'Смоленская область готова почувствовать вайб КАРДО и собрать представителей улиц в одном месте.
+
+Покажи себя на региональном этапе в Смоленске. 29 июня пройдут соревнования по направлениям: скейтбординг, трюковой самокат, BMX, хип-хоп, брейкинг, граффити.
+
+Топы получат возможность приехать 22-25 августа на Гранд-финал «КАРДО» в Ставрополь.
+
+Время и место проведения:
+— Дворец спорта «Юбилейный» с 12:00.',
+    '2024-02-10 13:00:00',
+    'РЕГИОНАЛЬНЫЙ ЭТАП: СМОЛЕНСКАЯ ОБЛАСТЬ',
+    '2024-06-29 12:00:00',
+    3
+);
+
+INSERT INTO resources (resource_id, title, type, link) VALUES (
+    1,
+    'Заставка Intro 16x9
+«Интро» (заставка в начале видео) для видео участников (во всех конкурсах)',
+    'video',
+    'src/main/resources/resource/KARDO 7 Intro FHD.mp4'
+);
+
+INSERT INTO resources (resource_id, title, type, link) VALUES (
+    2,
+    'Заставка Outro 16x9
+«Аутро» (заставка для заключительной части видео) для видео участников (во всех конкурсах)',
+    'video',
+    'src/main/resources/resource/KARDO 7 Outro FHD.mp4'
+);
+
+INSERT INTO resources (resource_id, title, type, link) VALUES (
+    3,
+    'Заставка Intro 9x16
+«Интро» (заставка в начале видео) для видео участников (во всех конкурсах)',
+    'video',
+    'src/main/resources/resource/KARDO 7 Intro 9х16.mp4'
+);
+
+INSERT INTO resources (resource_id, title, type, link) VALUES (
+    4,
+    'Заставка Outro 9x16
+«Аутро» (заставка для заключительной части видео) для видео участников (во всех конкурсах)',
+    'video',
+    'src/main/resources/resource/KARDO 7 Outro 9х16.mp4'
+);

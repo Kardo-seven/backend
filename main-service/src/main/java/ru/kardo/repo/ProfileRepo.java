@@ -27,12 +27,10 @@ public interface ProfileRepo extends JpaRepository<Profile, Long> {
             "AND ( (d IN (?2)) OR ((?2) is null) ) " +
             "AND ( (a IN (?3)) OR ((?3) is null) ) " +
             "AND ( (p.country IN (?4)) OR ((?4) is null) ) " +
-            "AND (p.isChild=?5)" +
-            "AND (p.isChildExpert=?6)" +
             "GROUP BY p.id " +
             "ORDER BY p.id")
     List<Profile> findStaff(Set<String> seasons, Set<DirectionEnum> directions, Set<Authority> authoritySet,
-                            Set<String> countries, Boolean isChild, Boolean isChildExpert, Pageable page);
+                            Set<String> countries, Pageable page);
 
     List<Profile> findAllByIsChildTrueOrIsChildExpertTrue();
 
