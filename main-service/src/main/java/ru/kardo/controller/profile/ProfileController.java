@@ -72,11 +72,13 @@ public class ProfileController {
                                           @RequestParam(required = false) Set<DirectionEnum> directions,
                                           @RequestParam(required = false) Set<EnumAuth> authorities,
                                           @RequestParam(required = false) Set<String> countries,
-                                          @RequestParam(defaultValue = "false", required = false) Boolean isChild,
-                                          @RequestParam(defaultValue = "false", required = false) Boolean isChildExpert,
                                           @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
                                           @RequestParam(defaultValue = "5") @Positive Integer size) {
-        return profileService.getStaffAndFacts(seasons, directions, authorities, countries,
-                isChild, isChildExpert, from, size);
+        return profileService.getStaffAndFacts(seasons, directions, authorities, countries, from, size);
+    }
+
+    @GetMapping("/kids_and_experts")
+    public List<ProfileAboutDto> getKidsAndStaff() {
+        return profileService.getChildrenAndExperts();
     }
 }

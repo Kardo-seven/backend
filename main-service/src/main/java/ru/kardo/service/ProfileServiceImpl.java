@@ -1,5 +1,6 @@
 package ru.kardo.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +18,12 @@ import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.EnumAuth;
 import ru.kardo.repo.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -191,11 +194,16 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileAboutDto> getStaffAndFacts(Set<String> seasons, Set<DirectionEnum> directions,
                                                   Set<EnumAuth> authorities, Set<String> countries,
-                                                  Boolean isChild, Boolean isChildExpert,
                                                   Integer from, Integer size) {
         Pageable page = PageRequest.of(from / size, size, Sort.by(Sort.Direction.DESC, "id"));
-        return profileRepo.findStaff(seasons, directions, mapAuthority(authorities), countries,
-                        isChild, isChildExpert, page).stream()
+        return profileRepo.findStaff(seasons, directions, mapAuthority(authorities), countries, page).stream()
+                .map(profileMapper::toProfileAboutDto)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @Override
+    public List<ProfileAboutDto> getChildrenAndExperts() {
+        return profileRepo.findAllByIsChildTrueOrIsChildExpertTrue().stream()
                 .map(profileMapper::toProfileAboutDto)
                 .collect(Collectors.toUnmodifiableList());
     }

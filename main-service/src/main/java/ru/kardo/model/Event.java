@@ -1,5 +1,6 @@
 package ru.kardo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kardo.model.enums.EventType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -22,6 +24,10 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
     private Long id;
+
+    @Column(name = "event_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate eventDate;
 
     @Column(name = "start_time")
     private LocalDateTime startTime;
@@ -44,6 +50,10 @@ public class Event {
 
     @Column(name = "is_grand_final_event")
     private Boolean isGrandFinalEvent;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", unique = true)
+    private EventImage eventImage;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "event_directions" , joinColumns = @JoinColumn(name = "event_id"))
