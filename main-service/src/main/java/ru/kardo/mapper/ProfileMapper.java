@@ -17,7 +17,7 @@ AvatarMapper.class})
 public interface ProfileMapper {
 
     @Mapping(target = "userId", source = "user.id")
-    @Mapping(target = "avatarId", source = "avatar.id")
+    @Mapping(target = "avatarLink", source = "avatar.link")
     @Mapping(target = "publicationDtoResponseList", source = "publicationList")
     ProfileFullDtoResponse toProfileFullDtoResponse(Profile profile);
 
