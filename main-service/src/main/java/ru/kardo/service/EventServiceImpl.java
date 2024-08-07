@@ -17,8 +17,6 @@ import ru.kardo.model.enums.EventType;
 import ru.kardo.repo.EventRepo;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -46,7 +44,12 @@ public class EventServiceImpl implements EventService{
                                                       Integer from, Integer size) {
         Pageable page = PageRequest.of(from, size, Sort.by("id").ascending());
         BooleanExpression expression = buildExpression(date, program, direction);
-        List<Event> eventList = eventRepo.findAll(expression, page).getContent().stream().filter(Event::getIsGrandFinalEvent).toList();
+        List<Event> eventList = eventRepo.findAll(expression, page).getContent()
+                .stream()
+                .filter(Event::getIsGrandFinalEvent).toList();
+        if (eventList.isEmpty()) {
+            eventList = eventRepo.findAllByIsGrandFinalEventTrue(page);
+        }
         return eventMapper.toEventDtoResponseList(eventList);
     }
 
