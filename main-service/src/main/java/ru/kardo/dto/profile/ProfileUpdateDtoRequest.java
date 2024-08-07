@@ -46,4 +46,8 @@ public class ProfileUpdateDtoRequest {
     private String citizenship;
 
     private List<String> linkList;
+
+    private Boolean isChild;
+
+    private Boolean isChildExpert;
 }

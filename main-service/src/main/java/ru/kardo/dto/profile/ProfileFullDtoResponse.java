@@ -41,11 +41,15 @@ public class ProfileFullDtoResponse {
 
     private String citizenship;
 
-    private Long avatarId;
+    private String avatarLink;
 
     private Long userId;
 
     private Set<Link> linkSet;
 
     private List<PublicationDtoResponse> publicationDtoResponseList;
+
+    private Boolean isChild;
+
+    private Boolean isChildExpert;
 }
