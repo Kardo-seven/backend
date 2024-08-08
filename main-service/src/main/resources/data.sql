@@ -192,51 +192,51 @@ INSERT INTO event_directions VALUES (10, 'GRAFFITI');
 
 INSERT INTO documents (document_id, title, type, link) VALUES (
     1,
-    'КАРДО[7]. Хип-хоп. Результаты второго этапа',
-    'document',
-    'src/main/resources/document/hip_hop_kardo-7_second-stage.pdf'
+    'hip_hop_kardo-7_second-stage.pdf',
+    'application/pdf',
+    'resources/document/hip_hop_kardo-7_second-stage.pdf'
 );
 
 INSERT INTO documents (document_id, title, type, link) VALUES (
     2,
-    'КАРДО[7]. Граффити. Результаты второго этапа',
-    'document',
-    'src/main/resources/document/graffiti_kardo-7_second-stage.pdf'
+    'graffiti_kardo-7_second-stage.pdf',
+    'application/pdf',
+    'resources/document/graffiti_kardo-7_second-stage.pdf'
 );
 
 INSERT INTO documents (document_id, title, type, link) VALUES (
     3,
-    'КАРДО[7]. Диджеинг. Результаты второго этапа',
-    'document',
-    'src/main/resources/document/dj_kardo-7_second-stage.pdf'
+    'dj_kardo-7_second-stage.pdf',
+    'application/pdf',
+    'resources/document/dj_kardo-7_second-stage.pdf'
 );
 
 INSERT INTO documents (document_id, title, type, link) VALUES (
     4,
-    'КАРДО[7]. Воркаут. Результаты второго этапа',
-    'document',
-    'src/main/resources/document/workout_kardo-7_second-stage.pdf'
+    'workout_kardo-7_second-stage.pdf',
+    'application/pdf',
+    'resources/document/workout_kardo-7_second-stage.pdf'
 );
 
 INSERT INTO documents (document_id, title, type, link) VALUES (
     5,
-    'Лауреаты конкурса «Премия» КАРДО [7]',
-    'document',
-    'src/main/resources/document/award_laureates_kardo-7.pdf'
+    'award_laureates_kardo-7.pdf',
+    'application/pdf',
+    'resources/document/award_laureates_kardo-7.pdf'
 );
 
 INSERT INTO documents (document_id, title, type, link) VALUES (
     6,
-    'КАРДО[7].Трикинг. Результаты второго этапа',
-    'document',
-    'src/main/resources/document/tricking_kardo-7_second-stage.pdf'
+    'tricking_kardo-7_second-stage.pdf',
+    'application/pdf',
+    'resources/document/tricking_kardo-7_second-stage.pdf'
 );
 
 INSERT INTO news_banner (news_banner_id, link, title, type) VALUES (
     1,
-    'src/main/resources/news/reg_mos_obl_kardo_24-1600x901.jpg.webp',
-    'РЕГИОНАЛЬНЫЙ ЭТАП: МОСКОВСКАЯ ОБЛАСТЬ',
-    'image jpg.webp'
+    'resources/news/reg_mos_obl_kardo_24.jpg',
+    'reg_mos_obl_kardo_24.jpg',
+    'image/jpeg'
 );
 
 INSERT INTO news (news_id, description, created, title, event_time, banner_id) VALUES (
@@ -257,9 +257,9 @@ INSERT INTO news (news_id, description, created, title, event_time, banner_id) V
 
 INSERT INTO news_banner (news_banner_id, link, title, type) VALUES (
     2,
-    'src/main/resources/news/reg_tatarstan_kardo_24-1600x901.jpg.webp',
-    'РЕГИОНАЛЬНЫЙ ЭТАП: РЕСПУБЛИКА ТАТАРСТАН',
-    'image jpg.webp'
+    'resources/news/reg_tatarstan_kardo_24.jpg',
+    'reg_tatarstan_kardo_24.jpg',
+    'image/jpeg'
 );
 
 INSERT INTO news (news_id, description, created, title, event_time, banner_id) VALUES (
@@ -278,9 +278,9 @@ INSERT INTO news (news_id, description, created, title, event_time, banner_id) V
 
 INSERT INTO news_banner (news_banner_id, link, title, type) VALUES (
     3,
-    'src/main/resources/news/reg_smolensk_kardo_24-1600x901.jpg.webp',
-    'РЕГИОНАЛЬНЫЙ ЭТАП: СМОЛЕНСКАЯ ОБЛАСТЬ',
-    'image jpg.webp'
+    'resources/news/reg_smolensk_kardo_24.jpg',
+    'reg_smolensk_kardo_24.jpg',
+    'image/jpeg'
 );
 
 INSERT INTO news (news_id, description, created, title, event_time, banner_id) VALUES (
@@ -301,32 +301,28 @@ INSERT INTO news (news_id, description, created, title, event_time, banner_id) V
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     1,
-    'Заставка Intro 16x9
-«Интро» (заставка в начале видео) для видео участников (во всех конкурсах)',
-    'video',
-    'src/main/resources/resource/KARDO 7 Intro FHD.mp4'
+    'KARDO 7 Intro FHD.mp4',
+    'video/mp4',
+    'resources/resource/KARDO 7 Intro FHD.mp4'
 );
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     2,
-    'Заставка Outro 16x9
-«Аутро» (заставка для заключительной части видео) для видео участников (во всех конкурсах)',
-    'video',
-    'src/main/resources/resource/KARDO 7 Outro FHD.mp4'
+    'KARDO 7 Outro FHD.mp4',
+    'video/mp4',
+    'resources/resource/KARDO 7 Outro FHD.mp4'
 );
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     3,
-    'Заставка Intro 9x16
-«Интро» (заставка в начале видео) для видео участников (во всех конкурсах)',
-    'video',
-    'src/main/resources/resource/KARDO 7 Intro 9х16.mp4'
+    'KARDO 7 Intro 9х16.mp4',
+    'video/mp4',
+    'resources/resource/KARDO 7 Intro 9х16.mp4'
 );
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     4,
-    'Заставка Outro 9x16
-«Аутро» (заставка для заключительной части видео) для видео участников (во всех конкурсах)',
-    'video',
-    'src/main/resources/resource/KARDO 7 Outro 9х16.mp4'
+    'KARDO 7 Outro 9х16.mp4',
+    'video/mp4',
+    'resources/resource/KARDO 7 Outro 9х16.mp4'
 );
