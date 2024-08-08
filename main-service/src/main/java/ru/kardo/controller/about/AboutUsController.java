@@ -22,7 +22,7 @@ public class AboutUsController {
 
     private final AboutService service;
 
-    @GetMapping("/news")
+    @GetMapping("/resources/news")
     public List<NewsDto> getNews() {
         return service.getNews();
     }
