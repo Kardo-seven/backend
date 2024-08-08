@@ -10,7 +10,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface EventMapper {
 
+    @Mapping(target = "eventImageDtoResponse", source = "eventImage")
     EventDtoResponse toEventDtoResponse(Event event);
 
+    @Mapping(target = "eventImageDtoResponse", source = "eventImage")
     List<EventDtoResponse> toEventDtoResponseList(List<Event> events);
 }
