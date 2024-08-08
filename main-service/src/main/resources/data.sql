@@ -301,28 +301,28 @@ INSERT INTO news (news_id, description, created, title, event_time, banner_id) V
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     1,
-    'KARDO 7 Intro FHD.mp4',
+    'KARDO_7_Intro_FHD.mp4',
     'video/mp4',
-    'resources/resource/KARDO 7 Intro FHD.mp4'
+    'resources/resource/KARDO_7_Intro_FHD.mp4'
 );
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     2,
-    'KARDO 7 Outro FHD.mp4',
+    'KARDO_7_Outro_FHD.mp4',
     'video/mp4',
-    'resources/resource/KARDO 7 Outro FHD.mp4'
+    'resources/resource/KARDO_7_Outro_FHD.mp4'
 );
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     3,
-    'KARDO 7 Intro 9х16.mp4',
+    'KARDO_7_Intro_9х16.mp4',
     'video/mp4',
-    'resources/resource/KARDO 7 Intro 9х16.mp4'
+    'resources/resource/KARDO_7_Intro_9х16.mp4'
 );
 
 INSERT INTO resources (resource_id, title, type, link) VALUES (
     4,
-    'KARDO 7 Outro 9х16.mp4',
+    'KARDO_7_Outro_9х16.mp4',
     'video/mp4',
-    'resources/resource/KARDO 7 Outro 9х16.mp4'
+    'resources/resource/KARDO_7_Outro_9х16.mp4'
 );
