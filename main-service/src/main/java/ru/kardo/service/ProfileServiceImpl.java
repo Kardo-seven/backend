@@ -1,6 +1,5 @@
 package ru.kardo.service;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +17,10 @@ import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.EnumAuth;
 import ru.kardo.repo.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -40,7 +37,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final AvatarMapper avatarMapper;
     private final PublicationRepo publicationRepo;
     private final PublicationMapper publicationMapper;
-    private final SubscriberRepo subscriberRepo;
+    private final SubscriptionRepo subscriptionRepo;
 
     @Override
     public ProfileFullDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
@@ -121,7 +118,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<ProfilePreviewDtoResponse> getSubscribers(Long profileId) {
-        List<Long> longs = subscriberRepo.getAllProfileSubscribers(profileId);
+        List<Long> longs = subscriptionRepo.getAllProfileSubscribers(profileId);
         List<Profile> profileList = longs.stream()
                 .filter(Objects::nonNull)
                 .map(id -> profileRepo.findById(id).orElseThrow(() ->
@@ -132,7 +129,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<ProfilePreviewDtoResponse> getSubscriptions(Long profileId) {
-        List<Long> longs = subscriberRepo.getAllProfileSubscriptions(profileId);
+        List<Long> longs = subscriptionRepo.getAllProfileSubscriptions(profileId);
         List<Profile> profileList = longs.stream()
                 .filter(Objects::nonNull)
                 .map(id -> profileRepo.findById(id).orElseThrow(() ->
@@ -178,11 +175,20 @@ public class ProfileServiceImpl implements ProfileService {
                 new NotFoundValidationException("Profile with id: " + profileId + " not found"));
         profileRepo.findById(subscriberId).orElseThrow(() ->
                 new NotFoundValidationException("Profile with id: " + subscriberId + " not found"));
-        validateUsersById(subscriberId, profileId);
-        Subscriber subscriber = Subscriber.builder()
+        validateSubscription(subscriberId, profileId);
+        Subscription subscription = Subscription.builder()
                 .userId(profileId)
                 .subscriberId(subscriberId).build();
-        subscriberRepo.save(subscriber);
+        subscriptionRepo.save(subscription);
+    }
+
+    private void validateSubscription(Long subscriberId, Long profileId) {
+        if (subscriberId.equals(profileId)) {
+            throw new ConflictException("Subscriber id and profile id must not be the same");
+        }
+        if (subscriptionRepo.getSubscriberBySubscriberIdAndUserId(subscriberId, profileId).isPresent()) {
+            throw new ConflictException("You already subscribe on this profile");
+        }
     }
 
     @Override
@@ -208,11 +214,7 @@ public class ProfileServiceImpl implements ProfileService {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private void validateUsersById(Long subscriberId, Long profileId) {
-        if (subscriberId.equals(profileId)) {
-            throw new ConflictException("Subscriber id and profile id must not be the same");
-        }
-    }
+
 
     private Set<Authority> mapAuthority(Set<EnumAuth> list) {
         if (list == null) {
