@@ -40,7 +40,7 @@ public class EventDtoResponse {
 
     private Boolean isGrandFinalEvent;
 
-    private EventImage eventImage;
+    private EventImageDtoResponse eventImageDtoResponse;
 
     private Set<Direction> directionSet;
 }

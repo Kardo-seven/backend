@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS profile (
     citizenship varchar(200),
     user_id BIGINT REFERENCES users(user_id) ON DELETE CASCADE NOT NULL,
     avatar_id BIGINT REFERENCES avatars(avatar_id) ON DELETE CASCADE unique,
-        about varchar,
+    about varchar,
     is_child BOOLEAN,
     is_child_expert BOOLEAN,
     PRIMARY KEY (user_id)
