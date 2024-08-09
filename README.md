@@ -23,3 +23,5 @@ Spring Boot 3
 6. run app from main class or from terminal (jar file in /target)
 
 http://localhost:8080/swagger-ui/index.html
+https://kardo.zapto.org/swagger-ui/index.html
+http://51.250.32.102:8080/swagger-ui/index.html
