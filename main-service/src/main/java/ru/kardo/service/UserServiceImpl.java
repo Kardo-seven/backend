@@ -3,6 +3,7 @@ package ru.kardo.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kardo.dto.user.UserDtoRequest;
 import ru.kardo.dto.user.UserDtoResponse;
 import ru.kardo.exception.ConflictException;
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public UserDtoResponse addUser(UserDtoRequest userDtoRequest) {
         emailValidation(userDtoRequest.getEmail());
         User user = User.builder()
