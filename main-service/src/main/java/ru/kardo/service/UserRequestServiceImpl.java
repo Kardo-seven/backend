@@ -70,6 +70,7 @@ public class UserRequestServiceImpl implements UserRequestService {
     }
 
     @Override
+    @Transactional
     public UserRequestDtoResponse postUserRequestToGrandFinalEvent(Long userId, Long eventId, UserRequestDtoRequest userRequestDtoRequest) {
         postUserRequestValidation(userRequestDtoRequest);
         Profile profile = profileRepo.findById(userId).orElseThrow(() ->
@@ -102,6 +103,7 @@ public class UserRequestServiceImpl implements UserRequestService {
     }
 
     @Override
+    @Transactional
     public RequestPreviewDtoResponse uploadRequestPreview(Long userId, Long eventId, MultipartFile multipartFile) throws IOException {
         Profile profile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile with id: " + userId + " not found"));
@@ -150,6 +152,7 @@ public class UserRequestServiceImpl implements UserRequestService {
     }
 
     @Override
+    @Transactional
     public UserRequestDtoResponse patchUserRequest(Long userId, Long requestId, UserRequestDtoRequest userRequestDtoRequest) {
         UserRequest userRequest = userRequestRepo.findByProfileIdAndId(userId, requestId).orElseThrow(() ->
                 new NotFoundValidationException("User request with id: " + requestId + " not found"));

@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kardo.dto.profile.*;
 import ru.kardo.exception.ConflictException;
@@ -40,6 +41,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final SubscriptionRepo subscriptionRepo;
 
     @Override
+    @Transactional
     public ProfileFullDtoResponse personalInformationUpdate(Long userId, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
         Profile oldProfile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile for user with id " + userId + " not found"));
@@ -50,6 +52,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional
     public AvatarDtoResponse uploadAvatar(Long userId, MultipartFile multipartFile) throws IOException {
         Profile profile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile with id: " + userId + " not found"));
@@ -80,6 +83,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional
     public PublicationDtoResponse uploadPublication(Long userId, MultipartFile multipartFile,
                                                     String description) throws IOException {
         Profile profile = profileRepo.findById(userId).orElseThrow(() ->
@@ -170,6 +174,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional
     public void subscribe(Long subscriberId, Long profileId) {
         profileRepo.findById(profileId).orElseThrow(() ->
                 new NotFoundValidationException("Profile with id: " + profileId + " not found"));
