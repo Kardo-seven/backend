@@ -1,4 +1,4 @@
-## Kardo backend
+## Kardo-backend
 
 ### System requirements:
 JDK 17 amazon corretto  
@@ -6,6 +6,8 @@ JDK 17 amazon corretto
 PostgreSQL
 
 IntellijIdea
+
+Spring Boot 3
 
 ### Startup instructions:
 1. Git clone or Download zip-file 

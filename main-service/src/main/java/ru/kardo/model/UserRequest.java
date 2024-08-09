@@ -66,6 +66,10 @@ public class UserRequest {
     @JoinColumn(name = "event_id")
     private Event event;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "grand_final_event_id")
+    private GrandFinalEvent grandFinalEvent;
+
     @Column(name = "created")
     @Builder.Default
     private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
