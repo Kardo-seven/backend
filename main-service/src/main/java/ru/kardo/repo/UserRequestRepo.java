@@ -18,4 +18,6 @@ public interface UserRequestRepo extends JpaRepository<UserRequest, Long> {
     Optional<UserRequest> findByProfileIdAndId(Long profileId, Long userRequestId);
 
     Optional<UserRequest> findUserRequestByProfileIdAndEventId(Long profileId, Long eventId);
+
+    Optional<UserRequest> findUserRequestByProfileIdAndGrandFinalEventId(Long profileId, Long eventId);
 }

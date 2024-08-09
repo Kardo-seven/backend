@@ -120,27 +120,26 @@ INSERT INTO event_directions VALUES (6, 'TRICKING');
 INSERT INTO event_directions VALUES (6, 'FREERAN');
 INSERT INTO event_directions VALUES (6, 'HIP_HOP');
 
-INSERT INTO events VALUES (7, '2024-08-22', '2024-08-22 19:00:00',
+INSERT INTO grand_final_events VALUES (1, '2024-08-22', '2024-08-22 19:00:00',
                            '2025-08-22 22:00:00',
                            'Шоу «Город КАРДО» Присоединяйся к главному герою в его путешествии по городу КАРДО и узнай, как одна мечта может изменить мир! Это шоу для всех, кто любит мечтать, творить и жить на полную! Хэдлайнером станет легендарная хардкор-рэп-группа «ONYX«!',
-                           'GRAND_FINAL',
+                           'ENTERTAINMENT_PROGRAM',
                            'Главное событие дня: Церемония открытия Международной Конкурс-премии «КАРДО»',
-                           'Главная сцена. Площадь Ленина',
-                           true);
+                           'Главная сцена. Площадь Ленина');
 
-INSERT INTO event_directions VALUES (7, 'BMX');
-INSERT INTO event_directions VALUES (7, 'SKATEBOARDING');
-INSERT INTO event_directions VALUES (7, 'PARKOUR');
-INSERT INTO event_directions VALUES (7, 'BREAKING');
-INSERT INTO event_directions VALUES (7, 'WORKOUT');
-INSERT INTO event_directions VALUES (7, 'GRAFFITI');
-INSERT INTO event_directions VALUES (7, 'DJING');
-INSERT INTO event_directions VALUES (7, 'STUNK_SCOOTER');
-INSERT INTO event_directions VALUES (7, 'TRICKING');
-INSERT INTO event_directions VALUES (7, 'FREERAN');
-INSERT INTO event_directions VALUES (7, 'HIP_HOP');
+INSERT INTO grand_final_event_directions VALUES (1, 'BMX');
+INSERT INTO grand_final_event_directions VALUES (1, 'SKATEBOARDING');
+INSERT INTO grand_final_event_directions VALUES (1, 'PARKOUR');
+INSERT INTO grand_final_event_directions VALUES (1, 'BREAKING');
+INSERT INTO grand_final_event_directions VALUES (1, 'WORKOUT');
+INSERT INTO grand_final_event_directions VALUES (1, 'GRAFFITI');
+INSERT INTO grand_final_event_directions VALUES (1, 'DJING');
+INSERT INTO grand_final_event_directions VALUES (1, 'STUNK_SCOOTER');
+INSERT INTO grand_final_event_directions VALUES (1, 'TRICKING');
+INSERT INTO grand_final_event_directions VALUES (1, 'FREERAN');
+INSERT INTO grand_final_event_directions VALUES (1, 'HIP_HOP');
 
-INSERT INTO events VALUES (8, '2024-08-22', '2024-08-22 16:00:00',
+INSERT INTO grand_final_events VALUES (2, '2024-08-22', '2024-08-22 16:00:00',
                            '2025-08-22 17:30:00',
                            'В рамках фестиваля «КАРДО» на площадке школы танцев OFFBEATS DANCE SCHOOL вас ждут:
 
@@ -149,15 +148,14 @@ INSERT INTO events VALUES (8, '2024-08-22', '2024-08-22 16:00:00',
 * Возможность попробовать новые стили танцев:  открой для себя мир хип-хопа и брейк-данса!
 
 Приходи и погрузись в мир уличных танцев!',
-                           'GRAND_FINAL',
+                           'STREET_CULTURE_AND_SPORTS_PROGRAM',
                            'Мастер-классы по хип-хопу и брейкингу от школы танцев OFFBEATS DANCE SCHOOL',
-                           'Площадка Школы танцев OFFBEATS DANCE SCHOOL (Площадь Ленина)',
-                           true);
+                           'Площадка Школы танцев OFFBEATS DANCE SCHOOL (Площадь Ленина)');
 
-INSERT INTO event_directions VALUES (8, 'BREAKING');
-INSERT INTO event_directions VALUES (8, 'HIP_HOP');
+INSERT INTO grand_final_event_directions VALUES (2, 'BREAKING');
+INSERT INTO grand_final_event_directions VALUES (2, 'HIP_HOP');
 
-INSERT INTO events VALUES (9, '2024-08-22', '2024-08-22 16:00:00',
+INSERT INTO grand_final_events VALUES (3, '2024-08-23', '2024-08-22 16:00:00',
                            '2025-08-22 20:00:00',
                            'Школа граффити и стрит-арта «Мастерская» приглашает вас окунуться в захватывающий мир уличного искусства!
 
@@ -166,14 +164,13 @@ INSERT INTO events VALUES (9, '2024-08-22', '2024-08-22 16:00:00',
 Впечатляющая выставка работ ставропольских граффити-художников на огромных холстах! Представьте себе масштаб — до трёх квадратных метров чистого творчества!
 Уникальная возможность познакомиться с мастерами своего дела: Nas, Ewar, Nest, Chosnne — опытные райтеры с десятилетним стажем, чьи работы украшают стены от Владивостока до Сочи, станут вашими проводниками в мир граффити.
 Не упустите шанс прикоснуться к искусству улиц и открыть для себя нечто новое!',
-                           'GRAND_FINAL',
+                           'STREET_CULTURE_AND_SPORTS_PROGRAM',
                            'Выставка стрит-арт работ Ставропольских граффити художников',
-                           'Площадка школы граффити и стрит-арта «Мастерская» (Площадь Ленина)',
-                           true);
+                           'Площадка школы граффити и стрит-арта «Мастерская» (Площадь Ленина)');
 
-INSERT INTO event_directions VALUES (9, 'GRAFFITI');
+INSERT INTO grand_final_event_directions VALUES (3, 'GRAFFITI');
 
-INSERT INTO events VALUES (10, '2024-08-22', '2024-08-22 16:00:00',
+INSERT INTO grand_final_events VALUES (4, '2024-08-22', '2024-08-22 16:00:00',
                            '2025-08-22 20:00:00',
                            'Школа граффити и стрит-арта «Мастерская» приглашает вас окунуться в захватывающий мир уличного искусства!
 
@@ -182,13 +179,30 @@ INSERT INTO events VALUES (10, '2024-08-22', '2024-08-22 16:00:00',
 Впечатляющая выставка работ ставропольских граффити-художников на огромных холстах! Представьте себе масштаб — до трёх квадратных метров чистого творчества!
 Уникальная возможность познакомиться с мастерами своего дела: Nas, Ewar, Nest, Chosnne — опытные райтеры с десятилетним стажем, чьи работы украшают стены от Владивостока до Сочи, станут вашими проводниками в мир граффити.
 Не упустите шанс прикоснуться к искусству улиц и открыть для себя нечто новое!',
-                           'VIDEO_CHALLENGE',
+                           'STREET_CULTURE_AND_SPORTS_PROGRAM',
                            'Выставка стрит-арт работ Ставропольских граффити художников',
-                           'Площадка школы граффити и стрит-арта «Мастерская» (Площадь Ленина)',
-                           true);
+                           'Площадка школы граффити и стрит-арта «Мастерская» (Площадь Ленина)');
 
 
-INSERT INTO event_directions VALUES (10, 'GRAFFITI');
+INSERT INTO grand_final_event_directions VALUES (4, 'GRAFFITI');
+
+INSERT INTO grand_final_events VALUES (5, '2024-08-25', '2024-08-25 19:30:00',
+                                       '2025-08-25 22:00:00',
+                                       'Приглашаем вас на концерт звезд VK RECORDS, который состоится под открытым небом на Главной сцене!
+
+Kumie
+Артист сочетает в своих треках жанры хип-хопа и поп-музыки. С детства одержимый музыкой, преодолел множество препятствий, включая сопротивление близких, чтобы следовать своему призванию. В своих текстах он говорит о жизненных целях, ценностях и любви.
+
+SAMPLIN
+Хип-хоп артист, чья музыка отличается оригинальным звучанием и глубокими текстами. Его творчество сочетает в себе разнообразные музыкальные стили, артист добавляет в свою музыку элементы рэпа, соула и R&B.
+
+Мутки
+Жизненные истории с самого дна жизни, неправильные решения и резкие движения, приводящие к непредсказуемым последствиям. Сочетание электронного звука, шаманского вокала и раскатистой читки — это мутки.',
+                                       'LEISURE_PROGRAM',
+                                       'Вечеринка VK Records',
+                                       'Главная сцена. Площадь Ленина');
+
+
 
 INSERT INTO documents (document_id, title, type, link) VALUES (
     1,
