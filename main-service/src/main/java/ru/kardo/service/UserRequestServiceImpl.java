@@ -13,10 +13,7 @@ import ru.kardo.mapper.RequestPreviewMapper;
 import ru.kardo.mapper.UserRequestMapper;
 import ru.kardo.model.*;
 import ru.kardo.model.enums.RequestStatus;
-import ru.kardo.repo.EventRepo;
-import ru.kardo.repo.ProfileRepo;
-import ru.kardo.repo.RequestPreviewRepo;
-import ru.kardo.repo.UserRequestRepo;
+import ru.kardo.repo.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,6 +34,7 @@ public class UserRequestServiceImpl implements UserRequestService {
     private final UserRequestMapper userRequestMapper;
     private final RequestPreviewRepo requestPreviewRepo;
     private final RequestPreviewMapper requestPreviewMapper;
+    private final GrandFinalEventRepo grandFinalEventRepo;
 
     @Override
     @Transactional
@@ -72,6 +70,40 @@ public class UserRequestServiceImpl implements UserRequestService {
     }
 
     @Override
+    @Transactional
+    public UserRequestDtoResponse postUserRequestToGrandFinalEvent(Long userId, Long eventId, UserRequestDtoRequest userRequestDtoRequest) {
+        postUserRequestValidation(userRequestDtoRequest);
+        Profile profile = profileRepo.findById(userId).orElseThrow(() ->
+                new NotFoundValidationException("Profile with id: " + userId + " not found"));
+        GrandFinalEvent grandFinalEvent = grandFinalEventRepo.findById(eventId).orElseThrow(() ->
+                new NotFoundValidationException("Event with id: " + eventId + " not found"));
+        if (userRequestRepo.findUserRequestByProfileIdAndGrandFinalEventId(profile.getId(), grandFinalEvent.getId()).isEmpty()) {
+            UserRequest userRequest = UserRequest.builder()
+                    .profile(profile)
+                    .name(userRequestDtoRequest.getName())
+                    .lastName(userRequestDtoRequest.getLastName())
+                    .surName(userRequestDtoRequest.getSurName())
+                    .phone(userRequestDtoRequest.getPhone())
+                    .email(userRequestDtoRequest.getEmail())
+                    .birthday(userRequestDtoRequest.getBirthday())
+                    .typeOfSelection(userRequestDtoRequest.getTypeOfSelection())
+                    .gender(userRequestDtoRequest.getGender())
+                    .linkSet(new HashSet<>())
+                    .grandFinalEvent(grandFinalEvent)
+                    .directionSet(new HashSet<>())
+                    .requestStatus(RequestStatus.SEND)
+                    .build();
+            userRequestDtoRequest.getDirectionEnumList().forEach(directionEnum -> userRequest.getDirectionSet().add(new Direction(directionEnum)));
+            userRequestDtoRequest.getLinkList().forEach(link -> userRequest.getLinkSet().add(new Link(link)));
+            userRequestRepo.save(userRequest);
+            return userRequestMapper.toUserRequestDtoResponse(userRequest);
+        } else {
+            throw new ConflictException("User already registered on event with id: " + eventId);
+        }
+    }
+
+    @Override
+    @Transactional
     public RequestPreviewDtoResponse uploadRequestPreview(Long userId, Long eventId, MultipartFile multipartFile) throws IOException {
         Profile profile = profileRepo.findById(userId).orElseThrow(() ->
                 new NotFoundValidationException("Profile with id: " + userId + " not found"));
@@ -120,6 +152,7 @@ public class UserRequestServiceImpl implements UserRequestService {
     }
 
     @Override
+    @Transactional
     public UserRequestDtoResponse patchUserRequest(Long userId, Long requestId, UserRequestDtoRequest userRequestDtoRequest) {
         UserRequest userRequest = userRequestRepo.findByProfileIdAndId(userId, requestId).orElseThrow(() ->
                 new NotFoundValidationException("User request with id: " + requestId + " not found"));

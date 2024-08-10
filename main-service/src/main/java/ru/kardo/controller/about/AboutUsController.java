@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/about")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000", "https://kardo.zapto.org", "https://kardo-frontend.vercel.app", "http://51.250.32.102:8080"})
 public class AboutUsController {
 
     private final AboutService service;

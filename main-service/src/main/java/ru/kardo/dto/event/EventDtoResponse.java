@@ -20,27 +20,12 @@ public class EventDtoResponse {
 
     private Long id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate eventDate;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime startTime;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime endTime;
-
-    private String description;
-
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
-    private String location;
-
     private String title;
 
-    private Boolean isGrandFinalEvent;
+    private EventImageDtoResponse eventImageDtoResponse;
 
-    private EventImage eventImage;
-
-    private Set<Direction> directionSet;
+//    private Set<Direction> directionSet;
 }

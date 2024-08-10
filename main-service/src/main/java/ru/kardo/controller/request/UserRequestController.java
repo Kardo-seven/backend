@@ -32,6 +32,14 @@ public class UserRequestController {
         return ResponseEntity.status(201).body(userRequestService.postUserRequest(user.getId(), eventId, userRequestDtoRequest));
     }
 
+    @PostMapping("/grand-final-event/{eventId}")
+    public ResponseEntity<UserRequestDtoResponse> postUserRequestToGrandFinaLEvent(Principal principal, @PathVariable Long eventId,
+                                                                  @Valid @RequestBody UserRequestDtoRequest userRequestDtoRequest) {
+        User user = userService.findUserByEmail(principal.getName());
+        log.info("POST: /user/grand-final/request/{} for {}", eventId, user.getEmail());
+        return ResponseEntity.status(201).body(userRequestService.postUserRequestToGrandFinalEvent(user.getId(), eventId, userRequestDtoRequest));
+    }
+
     @PostMapping("/{eventId}/upload-preview")
     public ResponseEntity<RequestPreviewDtoResponse> uploadPreview(Principal principal, @PathVariable Long eventId,
                                                                    @RequestParam("file") @RequestPart MultipartFile multipartFile) throws IOException {
