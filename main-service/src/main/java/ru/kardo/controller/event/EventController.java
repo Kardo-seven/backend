@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kardo.dto.event.EventDtoResponse;
+import ru.kardo.dto.event.GrandFinalEventDtoResponse;
 import ru.kardo.service.EventService;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/event")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = {"http://localhost:3000", "https://kardo.zapto.org", "https://kardo-frontend.vercel.app", "http://51.250.32.102:8080"})
 public class EventController {
 
     private final EventService eventService;
@@ -33,12 +35,12 @@ public class EventController {
     }
 
     @GetMapping("/program")
-    public ResponseEntity<List<EventDtoResponse>> getGrandFinalEvents(@RequestParam(required = false) LocalDate date,
-                                                                      @RequestParam(required = false) String program,
-                                                                      @RequestParam(required = false) String direction,
-                                                                      @RequestParam(value = "from", defaultValue = "0")
+    public ResponseEntity<List<GrandFinalEventDtoResponse>> getGrandFinalEvents(@RequestParam(required = false) LocalDate date,
+                                                                                @RequestParam(required = false) String program,
+                                                                                @RequestParam(required = false) String direction,
+                                                                                @RequestParam(value = "from", defaultValue = "0")
                                                                           @PositiveOrZero Integer from,
-                                                                      @RequestParam(value = "size", defaultValue = "3")
+                                                                                @RequestParam(value = "size", defaultValue = "3")
                                                                           @Positive Integer size) {
         log.info("GET: /event/program?date={}&program={}&direction={}&from={}&size={}", date, program, direction, from, size);
         return ResponseEntity.ok().body(eventService.getGrandFinalEvents(date, program, direction, from, size));

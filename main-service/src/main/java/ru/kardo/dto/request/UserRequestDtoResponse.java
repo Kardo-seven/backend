@@ -48,6 +48,8 @@ public class UserRequestDtoResponse {
 
     private Long eventId;
 
+    private Long grandFinalEventId;
+
     @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;
 

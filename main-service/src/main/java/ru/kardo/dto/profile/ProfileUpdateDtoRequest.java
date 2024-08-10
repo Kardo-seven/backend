@@ -8,10 +8,12 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.kardo.model.enums.DirectionEnum;
 import ru.kardo.model.enums.Gender;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -50,4 +52,8 @@ public class ProfileUpdateDtoRequest {
     private Boolean isChild;
 
     private Boolean isChildExpert;
+
+    private Set<String> seasons;
+
+    private Set<DirectionEnum> directions;
 }

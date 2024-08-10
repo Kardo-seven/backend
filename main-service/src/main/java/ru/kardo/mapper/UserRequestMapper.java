@@ -14,6 +14,7 @@ public interface UserRequestMapper {
 
     @Mapping(target = "eventId", source = "event.id")
     @Mapping(target = "profileId", source = "profile.id")
+    @Mapping(target = "grandFinalEventId", source = "grandFinalEvent.id")
     @Mapping(target = "requestPreviewId", source = "requestPreview.id")
     UserRequestDtoResponse toUserRequestDtoResponse(UserRequest userRequest);
 

@@ -41,5 +41,7 @@ public interface ProfileService {
                                            Set<EnumAuth> roles, Set<String> countries,
                                            Integer from, Integer size);
 
-    List<ProfileAboutDto> getChildrenAndExperts();
+    List<ProfileAboutDto> getChildrenAndExperts(Set<String> seasons, Set<DirectionEnum> directions,
+                                                Set<EnumAuth> roles, Set<String> countries,
+                                                Integer from, Integer size);
 }

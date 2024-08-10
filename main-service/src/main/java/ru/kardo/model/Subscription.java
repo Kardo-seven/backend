@@ -1,23 +1,24 @@
 package ru.kardo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "subscribers")
+@Table(name = "subscriptions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Subscriber {
+public class Subscription {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subscription_id")
+    private Long id;
+
     @Column(name = "user_id")
     private Long userId;
 
