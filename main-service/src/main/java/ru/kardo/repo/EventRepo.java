@@ -13,7 +13,4 @@ import java.util.List;
 @Repository
 public interface EventRepo extends JpaRepository<Event, Long>, QuerydslPredicateExecutor<Event> {
 
-    List<Event> findAllByIsGrandFinalEventTrue(Pageable page);
-
-    List<Event> findAllByIsGrandFinalEventFalse();
 }

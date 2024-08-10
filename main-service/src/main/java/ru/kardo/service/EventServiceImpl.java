@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public List<EventDtoResponse> getAllEvents() {
-        List<Event> eventList = eventRepo.findAllByIsGrandFinalEventFalse();
+        List<Event> eventList = eventRepo.findAll();
         return eventMapper.toEventDtoResponseList(eventList);
     }
 
