@@ -78,7 +78,12 @@ public class ProfileController {
     }
 
     @GetMapping("/kids_and_experts")
-    public List<ProfileAboutDto> getKidsAndStaff() {
-        return profileService.getChildrenAndExperts();
+    public List<ProfileAboutDto> getKidsAndStaff(@RequestParam(required = false) Set<String> seasons,
+                                                 @RequestParam(required = false) Set<DirectionEnum> directions,
+                                                 @RequestParam(required = false) Set<EnumAuth> authorities,
+                                                 @RequestParam(required = false) Set<String> countries,
+                                                 @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
+                                                 @RequestParam(defaultValue = "5") @Positive Integer size) {
+        return profileService.getChildrenAndExperts(seasons, directions, authorities, countries, from, size);
     }
 }

@@ -37,6 +37,6 @@ public class News {
     private LocalDateTime eventTime;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "news_banner_id", referencedColumnName = "news_banner_id")
+    @JoinColumn(name = "banner_id", referencedColumnName = "news_banner_id")
     private NewsBanner banner;
 }
