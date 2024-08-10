@@ -6,6 +6,7 @@ import ru.kardo.dto.request.UserRequestDtoRequest;
 import ru.kardo.dto.request.UserRequestDtoResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface UserRequestService {
 
@@ -16,4 +17,6 @@ public interface UserRequestService {
    RequestPreviewDtoResponse uploadRequestPreview(Long userId, Long eventId, MultipartFile multipartFile) throws IOException;
 
    UserRequestDtoResponse patchUserRequest(Long userId, Long requestId, UserRequestDtoRequest userRequestDtoRequest);
+
+   List<UserRequestDtoResponse> getUserRequests(Long userId);
 }

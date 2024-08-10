@@ -8,6 +8,7 @@ import ru.kardo.model.Link;
 import ru.kardo.model.UserRequest;
 
 import java.util.HashSet;
+import java.util.List;
 
 @Mapper(componentModel = "spring", uses = ProfileMapper.class)
 public interface UserRequestMapper {
@@ -17,6 +18,12 @@ public interface UserRequestMapper {
     @Mapping(target = "grandFinalEventId", source = "grandFinalEvent.id")
     @Mapping(target = "requestPreviewId", source = "requestPreview.id")
     UserRequestDtoResponse toUserRequestDtoResponse(UserRequest userRequest);
+
+    @Mapping(target = "eventId", source = "event.id")
+    @Mapping(target = "profileId", source = "profile.id")
+    @Mapping(target = "grandFinalEventId", source = "grandFinalEvent.id")
+    @Mapping(target = "requestPreviewId", source = "requestPreview.id")
+    List<UserRequestDtoResponse> toUserRequestDtoResponseList(List<UserRequest> userRequestList);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateUserRequestDtoResponse(UserRequestDtoRequest userRequestDtoRequest, @MappingTarget UserRequest userRequest);
