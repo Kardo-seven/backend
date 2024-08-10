@@ -14,6 +14,7 @@ import ru.kardo.service.UserRequestService;
 import ru.kardo.service.UserService;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("user/request")
@@ -54,5 +55,12 @@ public class UserRequestController {
         User user = userService.findUserByEmail(principal.getName());
         log.info("PATCH: /user/request/{}", requestId);
         return ResponseEntity.ok().body(userRequestService.patchUserRequest(user.getId(), requestId, userRequestDtoRequest));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<UserRequestDtoResponse>> getUserRequests(Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        log.info("GET: /user/request for {}", user.getEmail());
+        return ResponseEntity.ok().body(userRequestService.getUserRequests(user.getId()));
     }
 }
