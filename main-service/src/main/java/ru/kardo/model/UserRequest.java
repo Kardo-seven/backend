@@ -51,6 +51,9 @@ public class UserRequest {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "type_of_selection")
     @Enumerated(EnumType.STRING)
     private TypeOfSelection typeOfSelection;
