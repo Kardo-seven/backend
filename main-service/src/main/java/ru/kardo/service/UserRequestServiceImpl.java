@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +53,7 @@ public class UserRequestServiceImpl implements UserRequestService {
                     .surName(userRequestDtoRequest.getSurName())
                     .phone(userRequestDtoRequest.getPhone())
                     .email(userRequestDtoRequest.getEmail())
+                    .address(userRequestDtoRequest.getAddress())
                     .birthday(userRequestDtoRequest.getBirthday())
                     .typeOfSelection(userRequestDtoRequest.getTypeOfSelection())
                     .gender(userRequestDtoRequest.getGender())
@@ -85,6 +87,7 @@ public class UserRequestServiceImpl implements UserRequestService {
                     .surName(userRequestDtoRequest.getSurName())
                     .phone(userRequestDtoRequest.getPhone())
                     .email(userRequestDtoRequest.getEmail())
+                    .address(userRequestDtoRequest.getAddress())
                     .birthday(userRequestDtoRequest.getBirthday())
                     .typeOfSelection(userRequestDtoRequest.getTypeOfSelection())
                     .gender(userRequestDtoRequest.getGender())
@@ -163,7 +166,14 @@ public class UserRequestServiceImpl implements UserRequestService {
         userRequestRepo.save(userRequest);
         return userRequestMapper.toUserRequestDtoResponse(userRequest);
     }
-//    private UserRequest userRequestParametersUpdate(UserRequest oldUserRequest, UserRequestDtoRequest userRequestDtoRequest) {
+
+    @Override
+    public List<UserRequestDtoResponse> getUserRequests(Long userId) {
+        List<UserRequest> userRequests = userRequestRepo.findAllByProfileId(userId);
+        return userRequestMapper.toUserRequestDtoResponseList(userRequests);
+    }
+
+    //    private UserRequest userRequestParametersUpdate(UserRequest oldUserRequest, UserRequestDtoRequest userRequestDtoRequest) {
 //        if (userRequestDtoRequest.getName() != null) {
 //            if (!userRequestDtoRequest.getName().isBlank()) {
 //                oldUserRequest.setName(userRequestDtoRequest.getName());
