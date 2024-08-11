@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS user_requests (
     birthday DATE,
     gender varchar(20),
     email varchar(200),
+    address varchar(200),
     created TIMESTAMP,
     status varchar(200),
     type_of_selection varchar(200),

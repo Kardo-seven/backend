@@ -37,6 +37,8 @@ public class UserRequestDtoRequest {
     @Email
     private String email;
 
+    private String address;
+
     @Past(message = "Birthdate cant be in future")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate birthday;
