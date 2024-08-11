@@ -14,11 +14,13 @@ import ru.kardo.service.UserRequestService;
 import ru.kardo.service.UserService;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("user/request")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = {"http://localhost:3000", "https://kardo.zapto.org", "https://kardo-frontend.vercel.app", "http://51.250.32.102:8080"})
 public class UserRequestController {
 
     private final UserService userService;
@@ -54,5 +56,12 @@ public class UserRequestController {
         User user = userService.findUserByEmail(principal.getName());
         log.info("PATCH: /user/request/{}", requestId);
         return ResponseEntity.ok().body(userRequestService.patchUserRequest(user.getId(), requestId, userRequestDtoRequest));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<UserRequestDtoResponse>> getUserRequests(Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        log.info("GET: /user/request for {}", user.getEmail());
+        return ResponseEntity.ok().body(userRequestService.getUserRequests(user.getId()));
     }
 }
