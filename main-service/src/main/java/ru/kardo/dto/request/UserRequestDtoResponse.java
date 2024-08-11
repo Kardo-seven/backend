@@ -34,6 +34,8 @@ public class UserRequestDtoResponse {
 
     private String email;
 
+    private String address;
+
     private LocalDate birthday;
 
     @Enumerated(EnumType.STRING)
