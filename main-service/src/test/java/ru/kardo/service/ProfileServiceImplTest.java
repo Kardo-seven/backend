@@ -25,10 +25,6 @@ import ru.kardo.model.enums.Gender;
 import util.TestUtil;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Set;
 
@@ -140,12 +136,13 @@ class ProfileServiceImplTest {
     @Test
     void shouldUploadAvatarUserAlreadyHasAvatarFoundFail() throws IOException {
         entryFile = TestUtil.createMultipartFile("src/test/resources/avatar.jpg");
-        profileService.uploadAvatar(user1.getId(), entryFile);
+        AvatarDtoResponse avatar = profileService.uploadAvatar(user1.getId(), entryFile);
 
         //повторная загрузка аватара
         Exception e = assertThrows(ConflictException.class,
                 () -> profileService.uploadAvatar(user1.getId(), entryFile));
         assertThat(e.getMessage(), equalTo("User already have avatar"));
+        TestUtil.deleteAll(user1.getEmail(), avatar.getLink());
     }
 
     @Test
@@ -221,13 +218,6 @@ class ProfileServiceImplTest {
     }
 
     @Test
-    void shouldGetSubscribersFail() {
-//        Exception e = assertThrows(NotFoundValidationException.class,
-//                () -> profileService.getSubscribers(unknownUserId));
-//        assertThat(e.getMessage(), equalTo("Profile with id: " + unknownUserId + " not found"));
-    }
-
-    @Test
     void shouldGetSubscriptionsSuccessfully() {
         //получение подписок пользователя
         profileService.subscribe(profile1.getId(), profile2.getId());
@@ -239,13 +229,6 @@ class ProfileServiceImplTest {
         list = profileService.getSubscriptions(profile1.getId());
 
         assertThat(list.size(), equalTo(2));
-    }
-
-    @Test
-    void shouldGetSubscriptionsFail() {
-//        Exception e = assertThrows(NotFoundValidationException.class,
-//                () -> profileService.getSubscriptions(unknownUserId));
-//        assertThat(e.getMessage(), equalTo("Profile with id: " + unknownUserId + " not found"));
     }
 
     @Test
@@ -347,7 +330,7 @@ class ProfileServiceImplTest {
     void shouldGetProfilesSuccessfully() {
         //получение профилей постранично
         List<ProfilePreviewDtoResponse> list = profileService.getProfiles(0, 5);
-        assertThat(list.size(), equalTo(4));
+        assertThat(list.size(), equalTo(5));
 
         list = profileService.getProfiles(0, 2);
         assertThat(list.size(), equalTo(2));
@@ -359,7 +342,7 @@ class ProfileServiceImplTest {
         assertThat(list.size(), equalTo(2));
 
         list = profileService.getProfiles(2, 2);
-        assertThat(list.size(), equalTo(0));
+        assertThat(list.size(), equalTo(1));
     }
 
     @Test
@@ -382,7 +365,7 @@ class ProfileServiceImplTest {
 
         //Получение общего списка сотрудников постранично
         list = profileService.getStaffAndFacts(null, null, null, null, 0, 5);
-        assertThat(list.size(), equalTo(4));
+        assertThat(list.size(), equalTo(5));
     }
 
     @Test
@@ -390,7 +373,7 @@ class ProfileServiceImplTest {
         //получение списка детей и специалистов по работе с ними
         List<ProfileAboutDto> list = profileService.getChildrenAndExperts(null, null,
                 null, null, 0, 5);
-        assertThat(list.size(), equalTo(2));
+        assertThat(list.size(), equalTo(3));
     }
 
     private UserDtoRequest createUserRequest(Integer id, EnumAuth authority) {

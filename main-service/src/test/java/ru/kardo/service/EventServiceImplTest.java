@@ -38,7 +38,7 @@ class EventServiceImplTest {
     @Test
     void shouldGetEventSuccessfully() {
         //получение события по его идентификатору
-        Long id = new Random().nextLong(6);
+        Long id = new Random().nextLong(1,7);
         EventDtoResponse event = service.getEvent(id);
 
         assertThat(event.getId(), equalTo(id));
