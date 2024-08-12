@@ -25,10 +25,6 @@ import ru.kardo.model.enums.Gender;
 import util.TestUtil;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Set;
 
@@ -333,20 +329,20 @@ class ProfileServiceImplTest {
     @Test
     void shouldGetProfilesSuccessfully() {
         //получение профилей постранично
-        List<ProfilePreviewDtoResponse> list = profileService.getProfiles(0, 5);
-        assertThat(list.size(), equalTo(5));
+        List<ProfilePreviewDtoResponse> list = profileService.getProfiles(0, 50);
+        assertThat(list.size(), equalTo(9));
 
         list = profileService.getProfiles(0, 2);
         assertThat(list.size(), equalTo(2));
 
         list = profileService.getProfiles(4, 2);
-        assertThat(list.isEmpty(), equalTo(true));
+        assertThat(list.size(), equalTo(1));
 
         list = profileService.getProfiles(1, 2);
         assertThat(list.size(), equalTo(2));
 
         list = profileService.getProfiles(2, 2);
-        assertThat(list.size(), equalTo(1));
+        assertThat(list.size(), equalTo(2));
     }
 
     @Test
@@ -376,8 +372,8 @@ class ProfileServiceImplTest {
     void shouldGetChildrenAndExpertsSuccessfully() {
         //получение списка детей и специалистов по работе с ними
         List<ProfileAboutDto> list = profileService.getChildrenAndExperts(null, null,
-                null, null, 0, 5);
-        assertThat(list.size(), equalTo(3));
+                null, null, 0, 9);
+        assertThat(list.size(), equalTo(5));
     }
 
     private UserDtoRequest createUserRequest(Integer id, EnumAuth authority) {
