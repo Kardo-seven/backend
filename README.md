@@ -1,13 +1,14 @@
 ## Kardo-backend
 
+### Backend developers:
+- Team lead - [Vladimir](https://github.com/Ovarbor)
+- Developer - [Igor](https://github.com/TY95MC)
+
 ### System requirements:
-JDK 17 amazon corretto  
-
-PostgreSQL
-
-IntellijIdea
-
-Spring Boot 3
+- JDK 17 amazon corretto
+- PostgreSQL 
+- IntellijIdea 
+- Spring Boot 3
 
 ### Startup instructions:
 1. Git clone or Download zip-file 
