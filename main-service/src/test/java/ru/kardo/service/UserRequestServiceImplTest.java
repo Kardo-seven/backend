@@ -164,6 +164,8 @@ class UserRequestServiceImplTest {
         previewResponse = requestService.uploadRequestPreview(profile1.getId(), event.getId(), entryFile);
 
         assertThat(previewResponse.getLink().contains(entryFile.getOriginalFilename()), equalTo(true));
+
+        TestUtil.deleteAll(user1.getEmail(), previewResponse.getLink());
     }
 
     @Test
@@ -188,6 +190,8 @@ class UserRequestServiceImplTest {
         e = assertThrows(ConflictException.class,
                 () -> requestService.uploadRequestPreview(profile1.getId(), event.getId(), entryFile));
         assertThat(e.getMessage(), equalTo("User request already registered"));
+
+        TestUtil.deleteAll(user1.getEmail(), previewResponse.getLink());
     }
 
     @Test

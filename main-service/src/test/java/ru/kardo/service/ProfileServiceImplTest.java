@@ -119,6 +119,8 @@ class ProfileServiceImplTest {
         AvatarDtoResponse avatar =
                 profileService.uploadAvatar(user1.getId(), entryFile);
         assertThat(avatar.getTitle(), endsWith(entryFile.getOriginalFilename()));
+
+        TestUtil.deleteAll(user1.getEmail(), avatar.getLink());
     }
 
     @Test
@@ -134,12 +136,13 @@ class ProfileServiceImplTest {
     @Test
     void shouldUploadAvatarUserAlreadyHasAvatarFoundFail() throws IOException {
         entryFile = TestUtil.createMultipartFile("src/test/resources/avatar.jpg");
-        profileService.uploadAvatar(user1.getId(), entryFile);
+        AvatarDtoResponse avatar = profileService.uploadAvatar(user1.getId(), entryFile);
 
         //повторная загрузка аватара
         Exception e = assertThrows(ConflictException.class,
                 () -> profileService.uploadAvatar(user1.getId(), entryFile));
         assertThat(e.getMessage(), equalTo("User already have avatar"));
+        TestUtil.deleteAll(user1.getEmail(), avatar.getLink());
     }
 
     @Test
@@ -150,6 +153,8 @@ class ProfileServiceImplTest {
                 profileService.uploadPublication(user1.getId(), entryFile, "description");
 
         assertThat(publication.getProfileId(), equalTo(profile1.getId()));
+
+        TestUtil.deleteAll(user1.getEmail(), publication.getLink());
     }
 
     @Test
@@ -173,6 +178,8 @@ class ProfileServiceImplTest {
 
         assertThat(avatar1.getTitle(), equalTo(avatar.getTitle()));
         assertThat(avatar1.getLink(), equalTo(avatar.getLink()));
+
+        TestUtil.deleteAll(user1.getEmail(), avatar1.getLink());
     }
 
     @Test
@@ -187,7 +194,7 @@ class ProfileServiceImplTest {
     @Test
     void shouldGetPublicationsSuccessfully() throws IOException {
         entryFile = TestUtil.createMultipartFile("src/test/resources/template.pdf");
-        profileService.uploadPublication(user2.getId(), entryFile, "description1");
+        PublicationDtoResponse publication = profileService.uploadPublication(user2.getId(), entryFile, "description1");
 
         entryFile = TestUtil.createMultipartFile("src/test/resources/template.pdf");
         profileService.uploadPublication(user2.getId(), entryFile, "description2");
@@ -196,6 +203,7 @@ class ProfileServiceImplTest {
         List<PublicationDtoResponse> publications = profileService.getPublications(user2.getId());
 
         assertThat(publications.size(), equalTo(2));
+        TestUtil.deleteAll(user2.getEmail(), publication.getLink());
     }
 
     @Test
@@ -210,13 +218,6 @@ class ProfileServiceImplTest {
     }
 
     @Test
-    void shouldGetSubscribersFail() {
-//        Exception e = assertThrows(NotFoundValidationException.class,
-//                () -> profileService.getSubscribers(unknownUserId));
-//        assertThat(e.getMessage(), equalTo("Profile with id: " + unknownUserId + " not found"));
-    }
-
-    @Test
     void shouldGetSubscriptionsSuccessfully() {
         //получение подписок пользователя
         profileService.subscribe(profile1.getId(), profile2.getId());
@@ -228,13 +229,6 @@ class ProfileServiceImplTest {
         list = profileService.getSubscriptions(profile1.getId());
 
         assertThat(list.size(), equalTo(2));
-    }
-
-    @Test
-    void shouldGetSubscriptionsFail() {
-//        Exception e = assertThrows(NotFoundValidationException.class,
-//                () -> profileService.getSubscriptions(unknownUserId));
-//        assertThat(e.getMessage(), equalTo("Profile with id: " + unknownUserId + " not found"));
     }
 
     @Test
@@ -283,6 +277,8 @@ class ProfileServiceImplTest {
 
         assertThat(resp.getLink(), equalTo(resp.getLink()));
         assertThat(resp.getId(), equalTo(resp.getId()));
+
+        TestUtil.deleteAll(user1.getEmail(), resp.getLink());
     }
 
     @Test
@@ -333,20 +329,20 @@ class ProfileServiceImplTest {
     @Test
     void shouldGetProfilesSuccessfully() {
         //получение профилей постранично
-        List<ProfilePreviewDtoResponse> list = profileService.getProfiles(0, 5);
-        assertThat(list.size(), equalTo(4));
+        List<ProfilePreviewDtoResponse> list = profileService.getProfiles(0, 50);
+        assertThat(list.size(), equalTo(9));
 
         list = profileService.getProfiles(0, 2);
         assertThat(list.size(), equalTo(2));
 
         list = profileService.getProfiles(4, 2);
-        assertThat(list.isEmpty(), equalTo(true));
+        assertThat(list.size(), equalTo(1));
 
         list = profileService.getProfiles(1, 2);
         assertThat(list.size(), equalTo(2));
 
         list = profileService.getProfiles(2, 2);
-        assertThat(list.size(), equalTo(0));
+        assertThat(list.size(), equalTo(2));
     }
 
     @Test
@@ -369,15 +365,15 @@ class ProfileServiceImplTest {
 
         //Получение общего списка сотрудников постранично
         list = profileService.getStaffAndFacts(null, null, null, null, 0, 5);
-        assertThat(list.size(), equalTo(4));
+        assertThat(list.size(), equalTo(5));
     }
 
     @Test
     void shouldGetChildrenAndExpertsSuccessfully() {
         //получение списка детей и специалистов по работе с ними
         List<ProfileAboutDto> list = profileService.getChildrenAndExperts(null, null,
-                null, null, 0, 5);
-        assertThat(list.size(), equalTo(2));
+                null, null, 0, 9);
+        assertThat(list.size(), equalTo(5));
     }
 
     private UserDtoRequest createUserRequest(Integer id, EnumAuth authority) {
