@@ -33,14 +33,6 @@ public class SecurityConfig {
 
     private RSAKey rsaKey;
 
-//    private final UserRepo userRepo;
-//
-//    @Primary
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new MyUserDataDetailsService(userRepo);
-//    }
-
     private final MyUserDataDetailsService myUserDataDetailsService;
 
     @Bean

@@ -8,5 +8,4 @@ import ru.kardo.model.Profile;
 @Repository
 public interface ProfileRepo extends JpaRepository<Profile, Long>, QuerydslPredicateExecutor<Profile> {
 
-    Profile findProfileByUserId(Long id);
 }

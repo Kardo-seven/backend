@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS avatars (
     link varchar(1000) NOT NULL
 );
 
-
 DROP TABLE IF EXISTS profile CASCADE;
 CREATE TABLE IF NOT EXISTS profile (
     name varchar(200),
@@ -78,12 +77,6 @@ CREATE TABLE IF NOT EXISTS event_images (
     type varchar(50) NOT NULL,
     link varchar(1000) NOT NULL
 );
-
--- DROP TABLE IF EXISTS event_directions CASCADE;
--- -- CREATE TABLE IF NOT EXISTS event_directions (
--- --     event_id BIGINT REFERENCES events(event_id) ON DELETE CASCADE,
--- --     direction varchar(100)
--- -- );
 
 DROP TABLE IF EXISTS grand_final_events CASCADE;
 CREATE TABLE IF NOT EXISTS grand_final_events (
