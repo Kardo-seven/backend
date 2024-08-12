@@ -6,5 +6,6 @@ import ru.kardo.model.Document;
 
 @Mapper(componentModel = "spring", uses = Document.class)
 public interface DocumentMapper {
+
     DocumentDto toDocumentDto(Document document);
 }

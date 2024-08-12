@@ -36,5 +36,4 @@ public class AboutUsController {
     public List<ResourceDto> getResources() {
         return service.getResources();
     }
-
 }

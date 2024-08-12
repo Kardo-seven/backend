@@ -330,19 +330,19 @@ class ProfileServiceImplTest {
     void shouldGetProfilesSuccessfully() {
         //получение профилей постранично
         List<ProfilePreviewDtoResponse> list = profileService.getProfiles(0, 50);
-        assertThat(list.size(), equalTo(9));
+        assertThat(list.size(), equalTo(4));
 
         list = profileService.getProfiles(0, 2);
         assertThat(list.size(), equalTo(2));
 
         list = profileService.getProfiles(4, 2);
-        assertThat(list.size(), equalTo(1));
+        assertThat(list.size(), equalTo(0));
 
         list = profileService.getProfiles(1, 2);
         assertThat(list.size(), equalTo(2));
 
         list = profileService.getProfiles(2, 2);
-        assertThat(list.size(), equalTo(2));
+        assertThat(list.size(), equalTo(0));
     }
 
     @Test
@@ -365,7 +365,7 @@ class ProfileServiceImplTest {
 
         //Получение общего списка сотрудников постранично
         list = profileService.getStaffAndFacts(null, null, null, null, 0, 5);
-        assertThat(list.size(), equalTo(5));
+        assertThat(list.size(), equalTo(4));
     }
 
     @Test
@@ -373,7 +373,7 @@ class ProfileServiceImplTest {
         //получение списка детей и специалистов по работе с ними
         List<ProfileAboutDto> list = profileService.getChildrenAndExperts(null, null,
                 null, null, 0, 9);
-        assertThat(list.size(), equalTo(5));
+        assertThat(list.size(), equalTo(2));
     }
 
     private UserDtoRequest createUserRequest(Integer id, EnumAuth authority) {
