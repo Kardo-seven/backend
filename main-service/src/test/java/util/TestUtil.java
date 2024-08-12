@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.apache.tomcat.util.http.fileupload.FileUtils.deleteDirectory;
+
 public class TestUtil {
 
     public static MultipartFile createMultipartFile(String filePath) throws IOException {
@@ -23,6 +25,8 @@ public class TestUtil {
             content.deleteOnExit();
             in = new FileInputStream(content);
             file = new MockMultipartFile(filePath, content.getName(), content.getName(), in);
+            content.delete();
+            in.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -32,5 +36,17 @@ public class TestUtil {
         }
 
         return file;
+    }
+
+    public static void deleteAll(String email, String link) throws IOException {
+        File directoryToBeDeleted = new File(link.split(email)[0] + email);
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+
+        System.out.println(directoryToBeDeleted.delete());
     }
 }
