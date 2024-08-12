@@ -1,5 +1,6 @@
 package ru.kardo.service;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -206,8 +207,9 @@ public class ProfileServiceImpl implements ProfileService {
     public List<ProfileAboutDto> getStaffAndFacts(Set<String> seasons, Set<DirectionEnum> directions,
                                                   Set<EnumAuth> authorities, Set<String> countries,
                                                   Integer from, Integer size) {
-        Pageable page = PageRequest.of(from / size, size, Sort.by(Sort.Direction.DESC, "id"));
-        return profileRepo.findStaff(seasons, directions, mapAuthority(authorities), countries, page).stream()
+        Pageable page = PageRequest.of(from, size, Sort.by(Sort.Direction.DESC, "id"));
+        BooleanExpression filters = buildExpression(seasons, directions, authorities, countries, false);
+        return profileRepo.findAll(filters, page).getContent().stream()
                 .map(profileMapper::toProfileAboutDto)
                 .collect(Collectors.toUnmodifiableList());
     }
@@ -216,19 +218,35 @@ public class ProfileServiceImpl implements ProfileService {
     public List<ProfileAboutDto> getChildrenAndExperts(Set<String> seasons, Set<DirectionEnum> directions,
                                                        Set<EnumAuth> authorities, Set<String> countries,
                                                        Integer from, Integer size) {
-        Pageable page = PageRequest.of(from / size, size, Sort.by(Sort.Direction.DESC, "id"));
-        return profileRepo.findChildrenAndChildExperts(seasons, directions, mapAuthority(authorities), countries, page).stream()
+        Pageable page = PageRequest.of(from, size, Sort.by(Sort.Direction.DESC, "id"));
+        BooleanExpression filters = buildExpression(seasons, directions, authorities, countries, true);
+        return profileRepo.findAll(filters, page).getContent().stream()
                 .map(profileMapper::toProfileAboutDto)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-
-
-    private Set<Authority> mapAuthority(Set<EnumAuth> list) {
-        if (list == null) {
-            return new HashSet<>();
+    private BooleanExpression buildExpression(Set<String> seasons, Set<DirectionEnum> directions,
+                                              Set<EnumAuth> authorities, Set<String> countries, boolean isChildrenAdExperts) {
+        QProfile qProfile = QProfile.profile;
+        BooleanExpression expression = qProfile.eq(qProfile);
+        if (seasons != null) {
+            expression = expression.and(qProfile.seasons.any().in(seasons));
         }
-        return list.stream().map(Authority::new).collect(Collectors.toSet());
+        if (directions != null) {
+            expression = expression.and(qProfile.directions.any().in(directions));
+        }
+        if (authorities != null) {
+            expression = expression.and(qProfile.user.authoritySet.any().in(
+                    authorities.stream().map(Authority::new).collect(Collectors.toSet()))
+            );
+        }
+        if (countries != null) {
+            expression = expression.and(qProfile.country.in(countries));
+        }
+        if (isChildrenAdExperts) {
+            expression = expression.andAnyOf(qProfile.isChild.isTrue(), qProfile.isChildExpert.isTrue());
+        }
+        return expression;
     }
 
 //    private Profile profileParametersUpdate(Profile oldProfile, ProfileUpdateDtoRequest profileUpdateDtoRequest) {
