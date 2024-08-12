@@ -25,6 +25,10 @@ import ru.kardo.model.enums.Gender;
 import util.TestUtil;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Set;
 
@@ -119,6 +123,8 @@ class ProfileServiceImplTest {
         AvatarDtoResponse avatar =
                 profileService.uploadAvatar(user1.getId(), entryFile);
         assertThat(avatar.getTitle(), endsWith(entryFile.getOriginalFilename()));
+
+        TestUtil.deleteAll(user1.getEmail(), avatar.getLink());
     }
 
     @Test
@@ -150,6 +156,8 @@ class ProfileServiceImplTest {
                 profileService.uploadPublication(user1.getId(), entryFile, "description");
 
         assertThat(publication.getProfileId(), equalTo(profile1.getId()));
+
+        TestUtil.deleteAll(user1.getEmail(), publication.getLink());
     }
 
     @Test
@@ -173,6 +181,8 @@ class ProfileServiceImplTest {
 
         assertThat(avatar1.getTitle(), equalTo(avatar.getTitle()));
         assertThat(avatar1.getLink(), equalTo(avatar.getLink()));
+
+        TestUtil.deleteAll(user1.getEmail(), avatar1.getLink());
     }
 
     @Test
@@ -187,7 +197,7 @@ class ProfileServiceImplTest {
     @Test
     void shouldGetPublicationsSuccessfully() throws IOException {
         entryFile = TestUtil.createMultipartFile("src/test/resources/template.pdf");
-        profileService.uploadPublication(user2.getId(), entryFile, "description1");
+        PublicationDtoResponse publication = profileService.uploadPublication(user2.getId(), entryFile, "description1");
 
         entryFile = TestUtil.createMultipartFile("src/test/resources/template.pdf");
         profileService.uploadPublication(user2.getId(), entryFile, "description2");
@@ -196,6 +206,7 @@ class ProfileServiceImplTest {
         List<PublicationDtoResponse> publications = profileService.getPublications(user2.getId());
 
         assertThat(publications.size(), equalTo(2));
+        TestUtil.deleteAll(user2.getEmail(), publication.getLink());
     }
 
     @Test
@@ -283,6 +294,8 @@ class ProfileServiceImplTest {
 
         assertThat(resp.getLink(), equalTo(resp.getLink()));
         assertThat(resp.getId(), equalTo(resp.getId()));
+
+        TestUtil.deleteAll(user1.getEmail(), resp.getLink());
     }
 
     @Test
