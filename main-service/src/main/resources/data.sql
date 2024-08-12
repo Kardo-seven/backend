@@ -345,29 +345,29 @@ insert into avatars(avatar_id, title, type, link) values(10005, 'user5_avatar.jp
 
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
- region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
- values('name10001', 'lastName', 'surName', 'phone10001', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
-  'RUSSIA', 10001, 10001, 'about', 'true', 'true');
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('Vlad', 'Petrov', 'surName', '89990785643', '1991-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 10001, 10001, 'about', 'true', 'true');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
- region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
- values('name10002', 'lastName', 'surName', 'phone10002', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
-  'RUSSIA', 10002, 10002, 'about', 'false','true');
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('Григорий', 'Жуков', 'surName', '89148783939', '1993-03-10', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 10002, 10002, 'about', 'false','true');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
- region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
- values('name10003', 'lastName', 'surName', 'phone10003', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
-  'RUSSIA', 10003, 10003, 'about', 'true', 'false');
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('Лиза', 'Михайлова', 'surName', '89243657464', '2000-06-09', 'WOMAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 10003, 10003, 'about', 'true', 'false');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
- region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
- values('name10004', 'lastName', 'surName', 'phone10004', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
-  'RUSSIA', 10004, 10004, 'about', 'false', 'false');
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('Давид', 'Голубев', 'surName', 'phone10004', '1997-10-10', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 10004, 10004, 'about', 'false', 'false');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
- region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
- values('name10005', 'lastName', 'surName', 'phone10005', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
-  'RUSSIA', 10005, 10005, 'about', 'false', 'false');
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('Валентин', 'Камнев', 'surName', 'phone10005', '1987-12-12', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 10005, 10005, 'about', 'false', 'false');
 
 
 insert into social_network_links(user_id, link) values(10001, 'link10001');
