@@ -217,14 +217,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Long getStaffCount() {
-        List<Profile> profileList = profileRepo.findAllByIsChildFalseAndIsChildExpertFalse();
-        return (long) profileList.size();
+        return profileRepo.countProfileByIsChildFalseAndIsChildExpertFalse();
     }
 
     @Override
     public Long getKidsAndStaffCount() {
-        List<Profile> profileList = profileRepo.findAllByIsChildTrueOrIsChildExpertTrue();
-        return (long) profileList.size();
+        return profileRepo.countProfileByIsChildTrueOrIsChildExpertTrue();
     }
 
     private BooleanExpression buildExpression(Set<String> seasons, Set<DirectionEnum> directions,
