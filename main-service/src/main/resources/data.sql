@@ -24,78 +24,6 @@ INSERT INTO event_images VALUES (4, 4, 'VIDEO_CHALLENGE.jpg', 'image/jpeg', 'res
 INSERT INTO event_images VALUES (5, 5, 'GRAND_FINAL.jpg', 'image/jpeg', 'resources/events/GRAND_FINAL.jpg');
 INSERT INTO event_images VALUES (6, 6, 'PROJECTS.jpg', 'image/jpeg', 'resources/events/PROJECTS.jpg');
 
--- INSERT INTO event_directions VALUES (1, 'BMX');
--- INSERT INTO event_directions VALUES (1, 'SKATEBOARDING');
--- INSERT INTO event_directions VALUES (1, 'PARKOUR');
--- INSERT INTO event_directions VALUES (1, 'BREAKING');
--- INSERT INTO event_directions VALUES (1, 'WORKOUT');
--- INSERT INTO event_directions VALUES (1, 'GRAFFITI');
--- INSERT INTO event_directions VALUES (1, 'DJING');
--- INSERT INTO event_directions VALUES (1, 'STUNK_SCOOTER');
--- INSERT INTO event_directions VALUES (1, 'TRICKING');
--- INSERT INTO event_directions VALUES (1, 'FREERAN');
--- INSERT INTO event_directions VALUES (1, 'HIP_HOP');
---
--- INSERT INTO event_directions VALUES (2, 'BMX');
--- INSERT INTO event_directions VALUES (2, 'SKATEBOARDING');
--- INSERT INTO event_directions VALUES (2, 'PARKOUR');
--- INSERT INTO event_directions VALUES (2, 'BREAKING');
--- INSERT INTO event_directions VALUES (2, 'WORKOUT');
--- INSERT INTO event_directions VALUES (2, 'GRAFFITI');
--- INSERT INTO event_directions VALUES (2, 'DJING');
--- INSERT INTO event_directions VALUES (2, 'STUNK_SCOOTER');
--- INSERT INTO event_directions VALUES (2, 'TRICKING');
--- INSERT INTO event_directions VALUES (2, 'FREERAN');
--- INSERT INTO event_directions VALUES (2, 'HIP_HOP');
---
--- INSERT INTO event_directions VALUES (3, 'BMX');
--- INSERT INTO event_directions VALUES (3, 'SKATEBOARDING');
--- INSERT INTO event_directions VALUES (3, 'PARKOUR');
--- INSERT INTO event_directions VALUES (3, 'BREAKING');
--- INSERT INTO event_directions VALUES (3, 'WORKOUT');
--- INSERT INTO event_directions VALUES (3, 'GRAFFITI');
--- INSERT INTO event_directions VALUES (3, 'DJING');
--- INSERT INTO event_directions VALUES (3, 'STUNK_SCOOTER');
--- INSERT INTO event_directions VALUES (3, 'TRICKING');
--- INSERT INTO event_directions VALUES (3, 'FREERAN');
--- INSERT INTO event_directions VALUES (3, 'HIP_HOP');
---
--- INSERT INTO event_directions VALUES (4, 'BMX');
--- INSERT INTO event_directions VALUES (4, 'SKATEBOARDING');
--- INSERT INTO event_directions VALUES (4, 'PARKOUR');
--- INSERT INTO event_directions VALUES (4, 'BREAKING');
--- INSERT INTO event_directions VALUES (4, 'WORKOUT');
--- INSERT INTO event_directions VALUES (4, 'GRAFFITI');
--- INSERT INTO event_directions VALUES (4, 'DJING');
--- INSERT INTO event_directions VALUES (4, 'STUNK_SCOOTER');
--- INSERT INTO event_directions VALUES (4, 'TRICKING');
--- INSERT INTO event_directions VALUES (4, 'FREERAN');
--- INSERT INTO event_directions VALUES (4, 'HIP_HOP');
---
--- INSERT INTO event_directions VALUES (5, 'BMX');
--- INSERT INTO event_directions VALUES (5, 'SKATEBOARDING');
--- INSERT INTO event_directions VALUES (5, 'PARKOUR');
--- INSERT INTO event_directions VALUES (5, 'BREAKING');
--- INSERT INTO event_directions VALUES (5, 'WORKOUT');
--- INSERT INTO event_directions VALUES (5, 'GRAFFITI');
--- INSERT INTO event_directions VALUES (5, 'DJING');
--- INSERT INTO event_directions VALUES (5, 'STUNK_SCOOTER');
--- INSERT INTO event_directions VALUES (5, 'TRICKING');
--- INSERT INTO event_directions VALUES (5, 'FREERAN');
--- INSERT INTO event_directions VALUES (5, 'HIP_HOP');
---
--- INSERT INTO event_directions VALUES (6, 'BMX');
--- INSERT INTO event_directions VALUES (6, 'SKATEBOARDING');
--- INSERT INTO event_directions VALUES (6, 'PARKOUR');
--- INSERT INTO event_directions VALUES (6, 'BREAKING');
--- INSERT INTO event_directions VALUES (6, 'WORKOUT');
--- INSERT INTO event_directions VALUES (6, 'GRAFFITI');
--- INSERT INTO event_directions VALUES (6, 'DJING');
--- INSERT INTO event_directions VALUES (6, 'STUNK_SCOOTER');
--- INSERT INTO event_directions VALUES (6, 'TRICKING');
--- INSERT INTO event_directions VALUES (6, 'FREERAN');
--- INSERT INTO event_directions VALUES (6, 'HIP_HOP');
-
 INSERT INTO grand_final_events VALUES (1, '2024-08-22', '2024-08-22 19:00:00',
                            '2025-08-22 22:00:00',
                            'Шоу «Город КАРДО» Присоединяйся к главному герою в его путешествии по городу КАРДО и узнай, как одна мечта может изменить мир! Это шоу для всех, кто любит мечтать, творить и жить на полную! Хэдлайнером станет легендарная хардкор-рэп-группа «ONYX«!',
@@ -317,12 +245,17 @@ INSERT INTO resources (resource_id, title, type, link) VALUES (
     'resources/resource/KARDO_7_Outro_9х16.mp4'
 );
 
-
 insert into users(user_id, email, password) values(10001, '10001@mail.ru', 'pass10001');
 insert into users(user_id, email, password) values(10002, '10002@mail.ru', 'pass10002');
 insert into users(user_id, email, password) values(10003, '10003@mail.ru', 'pass10003');
 insert into users(user_id, email, password) values(10004, '10004@mail.ru', 'pass10004');
 insert into users(user_id, email, password) values(10005, '10005@mail.ru', 'pass10005');
+
+insert into users(user_id, email, password) values(11111, '11111@mail.ru', 'pass11111');
+insert into users(user_id, email, password) values(22222, '22222@mail.ru', 'pass22222');
+insert into users(user_id, email, password) values(33333, '33333@mail.ru', 'pass33333');
+insert into users(user_id, email, password) values(44444, '44444@mail.ru', 'pass44444');
+insert into users(user_id, email, password) values(55555, '55555@mail.ru', 'pass55555');
 
 
 insert into authorities(user_id, authority) values(10001, 'PARTICIPANT');
@@ -331,43 +264,93 @@ insert into authorities(user_id, authority) values(10003, 'PARTICIPANT');
 insert into authorities(user_id, authority) values(10004, 'PARTICIPANT');
 insert into authorities(user_id, authority) values(10005, 'PARTICIPANT');
 
+insert into authorities(user_id, authority) values(11111, 'EXPERT');
+insert into authorities(user_id, authority) values(22222, 'EXPERT');
+insert into authorities(user_id, authority) values(33333, 'EXPERT');
+insert into authorities(user_id, authority) values(44444, 'EXPERT');
+insert into authorities(user_id, authority) values(55555, 'EXPERT');
+
 
 insert into avatars(avatar_id, title, type, link) values(10001, 'user1_avatar.jpg', 'image/jpeg',
-'resources/10001@mail.ru/avatar/user1_avatar.jpg');
+                                                         'resources/10001@mail.ru/avatar/user1_avatar.jpg');
 insert into avatars(avatar_id, title, type, link) values(10002, 'user2_avatar.jpg', 'image/jpeg',
-'resources/10002@mail.ru/avatar/user2_avatar.jpg');
+                                                         'resources/10002@mail.ru/avatar/user2_avatar.jpg');
 insert into avatars(avatar_id, title, type, link) values(10003, 'user3_avatar.jpg', 'image/jpeg',
-'resources/10003@mail.ru/avatar/user3_avatar.jpg');
+                                                         'resources/10003@mail.ru/avatar/user3_avatar.jpg');
 insert into avatars(avatar_id, title, type, link) values(10004, 'user4_avatar.jpg', 'image/jpeg',
-'resources/10004@mail.ru/avatar/user4_avatar.jpg');
+                                                         'resources/10004@mail.ru/avatar/user4_avatar.jpg');
 insert into avatars(avatar_id, title, type, link) values(10005, 'user5_avatar.jpg', 'image/jpeg',
-'resources/10005@mail.ru/avatar/user5_avatar.jpg');
+                                                         'resources/10005@mail.ru/avatar/user5_avatar.jpg');
+
+
+insert into avatars(avatar_id, title, type, link) values(11111, 'user1_avatar.jpg', 'image/jpeg',
+                                                         'resources/11111@mail.ru/avatar/user1_avatar.jpg');
+insert into avatars(avatar_id, title, type, link) values(22222, 'user2_avatar.jpg', 'image/jpeg',
+                                                         'resources/22222@mail.ru/avatar/user2_avatar.jpg');
+insert into avatars(avatar_id, title, type, link) values(33333, 'user3_avatar.jpg', 'image/jpeg',
+                                                         'resources/33333@mail.ru/avatar/user3_avatar.jpg');
+insert into avatars(avatar_id, title, type, link) values(44444, 'user4_avatar.jpg', 'image/jpeg',
+                                                         'resources/44444@mail.ru/avatar/user4_avatar.jpg');
+insert into avatars(avatar_id, title, type, link) values(55555, 'user5_avatar.jpg', 'image/jpeg',
+                                                         'resources/55555@mail.ru/avatar/user5_avatar.jpg');
+
+
+
+
 
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
                     region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
-values('Vlad', 'Petrov', 'surName', '89990785643', '1991-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+values('name10001', 'lastName', 'surName', 'phone10001', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
        'RUSSIA', 10001, 10001, 'about', 'true', 'true');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
                     region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
-values('Григорий', 'Жуков', 'surName', '89148783939', '1993-03-10', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+values('name10002', 'lastName', 'surName', 'phone10002', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
        'RUSSIA', 10002, 10002, 'about', 'false','true');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
                     region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
-values('Лиза', 'Михайлова', 'surName', '89243657464', '2000-06-09', 'WOMAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+values('name10003', 'lastName', 'surName', 'phone10003', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
        'RUSSIA', 10003, 10003, 'about', 'true', 'false');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
                     region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
-values('Давид', 'Голубев', 'surName', 'phone10004', '1997-10-10', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+values('name10004', 'lastName', 'surName', 'phone10004', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
        'RUSSIA', 10004, 10004, 'about', 'false', 'false');
 
 insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
                     region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
-values('Валентин', 'Камнев', 'surName', 'phone10005', '1987-12-12', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+values('name10005', 'lastName', 'surName', 'phone10005', '2024-02-09', 'MAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
        'RUSSIA', 10005, 10005, 'about', 'false', 'false');
+
+
+
+insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('name11111', 'lastName', 'surName', 'phone11111', '2024-02-09', 'WOMAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 11111, 11111, 'about', 'true', 'true');
+
+insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('name22222', 'lastName', 'surName', 'phone22222', '2024-02-09', 'WOMAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 22222, 22222, 'about', 'false','true');
+
+insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('name33333', 'lastName', 'surName', 'phone33333', '2024-02-09', 'WOMAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 33333, 33333, 'about', 'true', 'false');
+
+insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('name44444', 'lastName', 'surName', 'phone44444', '2024-02-09', 'WOMAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 44444, 44444, 'about', 'false', 'false');
+
+insert into profile(name, last_name, sur_name, phone, birthday, gender, country,
+                    region, city, citizenship, user_id, avatar_id, about, is_child, is_child_expert)
+values('name55555', 'lastName', 'surName', 'phone55555', '2024-02-09', 'WOMAN', 'RUSSIA', 'MOSCOW',  'MOSCOW',
+       'RUSSIA', 55555, 55555, 'about', 'false', 'false');
+
 
 
 insert into social_network_links(user_id, link) values(10001, 'link10001');
@@ -375,6 +358,12 @@ insert into social_network_links(user_id, link) values(10002, 'link10002');
 insert into social_network_links(user_id, link) values(10003, 'link10003');
 insert into social_network_links(user_id, link) values(10004, 'link10004');
 insert into social_network_links(user_id, link) values(10005, 'link10005');
+
+insert into social_network_links(user_id, link) values(11111, 'link11111');
+insert into social_network_links(user_id, link) values(22222, 'link22222');
+insert into social_network_links(user_id, link) values(33333, 'link33333');
+insert into social_network_links(user_id, link) values(44444, 'link44444');
+insert into social_network_links(user_id, link) values(55555, 'link55555');
 
 
 insert into profile_seasons(user_id, season) values(10001, 'season1');
@@ -394,6 +383,23 @@ insert into profile_seasons(user_id, season) values(10005, 'season1');
 insert into profile_seasons(user_id, season) values(10005, 'season4');
 
 
+insert into profile_seasons(user_id, season) values(11111, 'season1');
+insert into profile_seasons(user_id, season) values(11111, 'season2');
+insert into profile_seasons(user_id, season) values(11111, 'season3');
+
+insert into profile_seasons(user_id, season) values(22222, 'season1');
+insert into profile_seasons(user_id, season) values(22222, 'season2');
+
+insert into profile_seasons(user_id, season) values(33333, 'season1');
+insert into profile_seasons(user_id, season) values(33333, 'season3');
+
+insert into profile_seasons(user_id, season) values(44444, 'season1');
+insert into profile_seasons(user_id, season) values(44444, 'season4');
+
+insert into profile_seasons(user_id, season) values(55555, 'season1');
+insert into profile_seasons(user_id, season) values(55555, 'season4');
+
+
 insert into profile_directions(user_id, direction) values(10001, 'PARKOUR');
 insert into profile_directions(user_id, direction) values(10001, 'BMX');
 insert into profile_directions(user_id, direction) values(10001, 'SKATEBOARDING');
@@ -406,6 +412,12 @@ insert into profile_directions(user_id, direction) values(10003, 'BMX');
 insert into profile_directions(user_id, direction) values(10004, 'BMX');
 
 insert into profile_directions(user_id, direction) values(10005, 'BMX');
+
+insert into profile_directions(user_id, direction) values(11111, 'BMX');
+insert into profile_directions(user_id, direction) values(22222, 'BMX');
+insert into profile_directions(user_id, direction) values(33333, 'BMX');
+insert into profile_directions(user_id, direction) values(44444, 'BMX');
+insert into profile_directions(user_id, direction) values(55555, 'BMX');
 
 
 insert into subscriptions values (10001, 10001, 10002);
@@ -428,37 +440,93 @@ insert into subscriptions values (10013, 10005, 10002);
 insert into subscriptions values (10014, 10005, 10001);
 
 
+
+insert into subscriptions values (11111, 11111, 22222);
+insert into subscriptions values (11112, 11111, 10003);
+insert into subscriptions values (11113, 11111, 10004);
+insert into subscriptions values (11114, 11111, 10005);
+
+insert into subscriptions values (22222, 22222, 10001);
+insert into subscriptions values (22223, 22222, 10003);
+insert into subscriptions values (22224, 22222, 10005);
+
+insert into subscriptions values (33333, 33333, 10001);
+insert into subscriptions values (33334, 33333, 10002);
+insert into subscriptions values (33335, 33333, 10005);
+
+insert into subscriptions values (44444, 44444, 10002);
+insert into subscriptions values (44445, 44444, 10005);
+
+insert into subscriptions values (55555, 55555, 10002);
+insert into subscriptions values (55556, 55555, 10001);
+
+
 insert into publications values(10001, 10001, 'img1.jpg', 'image/jpeg',
-'resources/10001@mail.ru/publications/img1.jpg', 'description');
+                                'resources/10001@mail.ru/publications/img1.jpg', 'description');
 insert into publications values(10002, 10001, 'img2.jpg', 'image/jpeg',
-'resources/10001@mail.ru/publications/img2.jpg', 'description');
+                                'resources/10001@mail.ru/publications/img2.jpg', 'description');
 insert into publications values(10003, 10001, 'img3.jpg', 'image/jpeg',
-'resources/10001@mail.ru/publications/img3.jpg', 'description');
+                                'resources/10001@mail.ru/publications/img3.jpg', 'description');
 
 insert into publications values(10004, 10002, 'img1.jpg', 'image/jpeg',
-'resources/10002@mail.ru/publications/img1.jpg', 'description');
+                                'resources/10002@mail.ru/publications/img1.jpg', 'description');
 insert into publications values(10005, 10002, 'img2.jpg', 'image/jpeg',
-'resources/10002@mail.ru/publications/img2.jpg', 'description');
+                                'resources/10002@mail.ru/publications/img2.jpg', 'description');
 insert into publications values(10006, 10002, 'img3.jpg', 'image/jpeg',
-'resources/10002@mail.ru/publications/img3.jpg', 'description');
+                                'resources/10002@mail.ru/publications/img3.jpg', 'description');
 
 insert into publications values(10007, 10003, 'img1.jpg', 'image/jpeg',
-'resources/10003@mail.ru/publications/img1.jpg', 'description');
+                                'resources/10003@mail.ru/publications/img1.jpg', 'description');
 insert into publications values(10008, 10003, 'img2.jpg', 'image/jpeg',
-'resources/10003@mail.ru/publications/img2.jpg', 'description');
+                                'resources/10003@mail.ru/publications/img2.jpg', 'description');
 insert into publications values(10009, 10003, 'img3.jpg', 'image/jpeg',
-'resources/10003@mail.ru/publications/img3.jpg', 'description');
+                                'resources/10003@mail.ru/publications/img3.jpg', 'description');
 
 insert into publications values(10010, 10004, 'img1.jpg', 'image/jpeg',
-'resources/10004@mail.ru/publications/img1.jpg', 'description');
+                                'resources/10004@mail.ru/publications/img1.jpg', 'description');
 insert into publications values(10011, 10004, 'img2.jpg', 'image/jpeg',
-'resources/10004@mail.ru/publications/img2.jpg', 'description');
+                                'resources/10004@mail.ru/publications/img2.jpg', 'description');
 insert into publications values(10012, 10004, 'img3.jpg', 'image/jpeg',
-'resources/10004@mail.ru/publications/img3.jpg', 'description');
+                                'resources/10004@mail.ru/publications/img3.jpg', 'description');
 
 insert into publications values(10013, 10005, 'img1.jpg', 'image/jpeg',
-'resources/10005@mail.ru/publications/img1.jpg', 'description');
+                                'resources/10005@mail.ru/publications/img1.jpg', 'description');
 insert into publications values(10014, 10005, 'img2.jpg', 'image/jpeg',
-'resources/10005@mail.ru/publications/img2.jpg', 'description');
+                                'resources/10005@mail.ru/publications/img2.jpg', 'description');
 insert into publications values(10015, 10005, 'img3.jpg', 'image/jpeg',
-'resources/10005@mail.ru/publications/img3.jpg', 'description');
+                                'resources/10005@mail.ru/publications/img3.jpg', 'description');
+
+insert into publications values(11111, 11111, 'img1.jpg', 'image/jpeg',
+                                'resources/11111@mail.ru/publications/img1.jpg', 'description');
+insert into publications values(11112, 11111, 'img2.jpg', 'image/jpeg',
+                                'resources/11111@mail.ru/publications/img2.jpg', 'description');
+insert into publications values(11113, 11111, 'img3.jpg', 'image/jpeg',
+                                'resources/11111@mail.ru/publications/img3.jpg', 'description');
+
+insert into publications values(22222, 22222, 'img1.jpg', 'image/jpeg',
+                                'resources/22222@mail.ru/publications/img1.jpg', 'description');
+insert into publications values(22223, 22222, 'img2.jpg', 'image/jpeg',
+                                'resources/22222@mail.ru/publications/img2.jpg', 'description');
+insert into publications values(22224, 22222, 'img3.jpg', 'image/jpeg',
+                                'resources/22222@mail.ru/publications/img3.jpg', 'description');
+
+insert into publications values(33333, 33333, 'img1.jpg', 'image/jpeg',
+                                'resources/33333@mail.ru/publications/img1.jpg', 'description');
+insert into publications values(33334, 33333, 'img2.jpg', 'image/jpeg',
+                                'resources/33333@mail.ru/publications/img2.jpg', 'description');
+insert into publications values(33335, 33333, 'img3.jpg', 'image/jpeg',
+                                'resources/33333@mail.ru/publications/img3.jpg', 'description');
+
+insert into publications values(44444, 44444, 'img1.jpg', 'image/jpeg',
+                                'resources/44444@mail.ru/publications/img1.jpg', 'description');
+insert into publications values(44445, 44444, 'img2.jpg', 'image/jpeg',
+                                'resources/44444@mail.ru/publications/img2.jpg', 'description');
+insert into publications values(44446, 44444, 'img3.jpg', 'image/jpeg',
+                                'resources/44444@mail.ru/publications/img3.jpg', 'description');
+
+insert into publications values(55555, 55555, 'img1.jpg', 'image/jpeg',
+                                'resources/55555@mail.ru/publications/img1.jpg', 'description');
+insert into publications values(55556, 55555, 'img2.jpg', 'image/jpeg',
+                                'resources/55555@mail.ru/publications/img2.jpg', 'description');
+insert into publications values(55557, 55555, 'img3.jpg', 'image/jpeg',
+                                'resources/55555@mail.ru/publications/img3.jpg', 'description');
