@@ -1,4 +1,4 @@
-package ru.kardo.dto;
+package ru.kardo.dto.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

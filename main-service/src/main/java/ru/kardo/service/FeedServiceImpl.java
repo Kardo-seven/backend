@@ -1,10 +1,14 @@
 package ru.kardo.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kardo.dto.feed.CreateFeedDto;
 import ru.kardo.dto.feed.UpdateFeedDto;
+import ru.kardo.dto.profile.ProfilePreviewDtoResponse;
 import ru.kardo.exception.ConflictException;
 import ru.kardo.exception.NotFoundValidationException;
 import ru.kardo.mapper.FeedMapper;
@@ -14,7 +18,6 @@ import ru.kardo.model.Profile;
 import ru.kardo.repo.FeedMediaRepo;
 import ru.kardo.repo.FeedRepo;
 import ru.kardo.repo.ProfileRepo;
-import ru.kardo.repo.UserRepo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,16 +25,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ActivityFeedServiceImpl {
+public class FeedServiceImpl {
 
     private final FeedRepo feedRepo;
     private final FeedMediaRepo feedMediaRepo;
-    private final UserRepo userRepo;
     private final ProfileRepo profileRepo;
     private final ProfileService profileService;
 
@@ -103,6 +108,33 @@ public class ActivityFeedServiceImpl {
                     return feedMediaRepo.saveAndFlush(media);
                 })
                 .collect(Collectors.toSet());
+    }
+
+    public void getFeed(long id, Integer from, Integer size) {
+        checkIfProfileExist(id);
+        Pageable page = PageRequest.of(from, size, Sort.by(Sort.Direction.DESC, "id"));
+        List<ProfilePreviewDtoResponse> subscriptions = profileService.getSubscriptions(id);
+        List<Feed> feed = new ArrayList<>();
+        subscriptions.stream()
+                .map(sub -> feedRepo.getLatestFeed(sub.getId(), page).stream()
+                        .map(feed::add)
+                )
+                .collect(Collectors.toUnmodifiableList());
+
+        feed.stream()
+                .sorted(Comparator.comparing(Feed::getCreated).reversed())
+                .map(feedmapper::toFeedFullDto)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    public void getById(Long id) {
+        Feed feed = checkIfFeedExist(id);
+        feedmapper.toFeedFullDto(feed);
+    }
+
+    public void deleteById(Long id) {
+        Feed feed = checkIfFeedExist(id);
+        feedRepo.delete(feed);
     }
 
     private void validateOwner(Long ownerId, Feed feed) {

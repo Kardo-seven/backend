@@ -1,14 +1,6 @@
 package ru.kardo.dto.feed;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import ru.kardo.dto.CommentDto;
-import ru.kardo.model.Comment;
+import ru.kardo.dto.comment.CommentDto;
 import ru.kardo.model.FeedMedia;
 import ru.kardo.model.Profile;
 

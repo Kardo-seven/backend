@@ -226,7 +226,8 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     private BooleanExpression buildExpression(Set<String> seasons, Set<DirectionEnum> directions,
-                                              Set<EnumAuth> authorities, Set<String> countries, boolean isChildrenAdExperts) {
+                                              Set<EnumAuth> authorities, Set<String> countries,
+                                              boolean isChildrenAdExperts/*, boolean isCount*/) {
         QProfile qProfile = QProfile.profile;
         BooleanExpression expression = qProfile.eq(qProfile);
         if (seasons != null) {
@@ -246,6 +247,9 @@ public class ProfileServiceImpl implements ProfileService {
         if (isChildrenAdExperts) {
             expression = expression.andAnyOf(qProfile.isChild.isTrue(), qProfile.isChildExpert.isTrue());
         }
+//        if (isCount) {
+//            expression.count();
+//        }
         return expression;
     }
 
