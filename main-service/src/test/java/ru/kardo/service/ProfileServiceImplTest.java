@@ -343,6 +343,9 @@ class ProfileServiceImplTest {
 
         list = profileService.getProfiles(2, 2);
         assertThat(list.size(), equalTo(2));
+
+        assertThat(profileService.getStaffCount(), equalTo(2L));
+        assertThat(profileService.getKidsAndStaffCount(), equalTo(5L));
     }
 
     @Test
