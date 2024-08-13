@@ -86,4 +86,16 @@ public class ProfileController {
                                                  @RequestParam(defaultValue = "5") @Positive Integer size) {
         return profileService.getChildrenAndExperts(seasons, directions, authorities, countries, from, size);
     }
+
+    @GetMapping("/staff-size")
+    public ResponseEntity<Long> getStaffCount() {
+        log.info("GET: /profile/staff-size");
+        return ResponseEntity.ok().body(profileService.getStaffCount());
+    }
+
+    @GetMapping("/kids-and-staff-size")
+    public ResponseEntity<Long> getKindsAndStaffCount() {
+        log.info("GET: /profile/kids-and-staff-size");
+        return ResponseEntity.ok().body(profileService.getKidsAndStaffCount());
+    }
 }

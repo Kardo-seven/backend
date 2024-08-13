@@ -215,6 +215,18 @@ public class ProfileServiceImpl implements ProfileService {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @Override
+    public Long getStaffCount() {
+        List<Profile> profileList = profileRepo.findAllByIsChildFalseAndIsChildExpertFalse();
+        return (long) profileList.size();
+    }
+
+    @Override
+    public Long getKidsAndStaffCount() {
+        List<Profile> profileList = profileRepo.findAllByIsChildTrueOrIsChildExpertTrue();
+        return (long) profileList.size();
+    }
+
     private BooleanExpression buildExpression(Set<String> seasons, Set<DirectionEnum> directions,
                                               Set<EnumAuth> authorities, Set<String> countries, boolean isChildrenAdExperts) {
         QProfile qProfile = QProfile.profile;

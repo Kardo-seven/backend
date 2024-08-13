@@ -44,4 +44,8 @@ public interface ProfileService {
     List<ProfileAboutDto> getChildrenAndExperts(Set<String> seasons, Set<DirectionEnum> directions,
                                                 Set<EnumAuth> roles, Set<String> countries,
                                                 Integer from, Integer size);
+
+    Long getStaffCount();
+
+    Long getKidsAndStaffCount();
 }
