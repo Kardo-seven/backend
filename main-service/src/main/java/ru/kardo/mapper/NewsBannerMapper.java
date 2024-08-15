@@ -6,5 +6,6 @@ import ru.kardo.model.NewsBanner;
 
 @Mapper(componentModel = "spring", uses = NewsBanner.class)
 public interface NewsBannerMapper {
+
     NewsBannerDto toNewsBannerDto(NewsBanner banner);
 }

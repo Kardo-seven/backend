@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewsBannerDto {
+
     private Long newsBannerId;
 
     private String link;
