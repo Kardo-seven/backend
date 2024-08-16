@@ -18,8 +18,7 @@ import ru.kardo.service.UserService;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = {"http://localhost:3000", "https://kardo.zapto.org", "https://kardo-frontend.vercel.app", "http://51.250.32.102:8080",
-"http://kardo.zapto.org"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://kardo.zapto.org", "https://kardo-frontend.vercel.app", "http://51.250.32.102:8080", "http://kardo.zapto.org"})
 public class AuthRegController {
 
     private final UserService userService;

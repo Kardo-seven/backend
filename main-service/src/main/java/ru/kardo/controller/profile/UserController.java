@@ -19,7 +19,7 @@ import java.security.Principal;
 @RequestMapping("/user")
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "https://kardo.zapto.org", "https://kardo-frontend.vercel.app", "http://51.250.32.102:8080"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://kardo.zapto.org", "https://kardo-frontend.vercel.app", "http://51.250.32.102:8080", "http://kardo.zapto.org"})
 public class UserController {
 
     private final ProfileService profileService;
