@@ -1,29 +1,27 @@
-package ru.kardo.dto.feed;
+package ru.kardo.dto.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.kardo.dto.feed.FeedFullDto;
 import ru.kardo.dto.profile.ProfilePreviewDtoResponse;
 
-import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class FeedFullDto {
+public class CommentFullDto {
     private Long id;
 
     private ProfilePreviewDtoResponse owner;
 
-    private Set<FeedMediaDto> media;
+    private FeedFullDto feed;
 
-    private String description;
-
-    private LocalDateTime created;
-
-    private Set<Long> comments = new LinkedHashSet<>();
+    private String text;
 
     private Set<Long> likes;
+
+    private Set<Long> replies = new LinkedHashSet<>();
 }

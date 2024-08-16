@@ -1,21 +1,18 @@
-package ru.kardo.dto.feed;
+package ru.kardo.dto.comment;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class CreateFeedDto {
-    Set<MultipartFile> media;
+@AllArgsConstructor
+public class UpdateCommentDto {
+    private Long id;
 
     @Size(min = 10)
     @NotBlank
-    String description;
+    private String text;
 }

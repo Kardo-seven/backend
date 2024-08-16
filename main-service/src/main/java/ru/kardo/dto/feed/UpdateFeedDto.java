@@ -13,7 +13,9 @@ import java.util.Set;
 public class UpdateFeedDto {
     private Long id;
 
-    Set<MultipartFile> media;
+    private Set<String> oldFilesLinks;
 
-    String description;
+    private Set<MultipartFile> files;
+
+    private String description;
 }

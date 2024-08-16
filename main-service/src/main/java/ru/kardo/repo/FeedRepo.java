@@ -12,6 +12,6 @@ import java.util.List;
 public interface FeedRepo extends JpaRepository<Feed, Long> {
     @Query("SELECT f " +
             "FROM Feed f " +
-            "WHERE f.owner.id = ?1")
+            "WHERE f.owner.id = ?1 ")
     List<Feed> getLatestFeed(Long id, Pageable page);
 }
