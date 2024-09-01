@@ -226,7 +226,8 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     private BooleanExpression buildExpression(Set<String> seasons, Set<DirectionEnum> directions,
-                                              Set<EnumAuth> authorities, Set<String> countries, boolean isChildrenAdExperts) {
+                                              Set<EnumAuth> authorities, Set<String> countries,
+                                              boolean isChildrenAdExperts) {
         QProfile qProfile = QProfile.profile;
         BooleanExpression expression = qProfile.eq(qProfile);
         if (seasons != null) {

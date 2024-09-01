@@ -39,7 +39,7 @@ public class TestUtil {
     }
 
     public static void deleteAll(String email, String link) throws IOException {
-        File directoryToBeDeleted = new File(link.split(email)[0] + email);
+        File directoryToBeDeleted = new File(link.split(email)[0]);
         File[] allContents = directoryToBeDeleted.listFiles();
         if (allContents != null) {
             for (File file : allContents) {
@@ -47,6 +47,6 @@ public class TestUtil {
             }
         }
 
-        System.out.println(directoryToBeDeleted.delete());
+        directoryToBeDeleted.delete();
     }
 }
